@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sınav Takvimi - 1. Dönem 1. Ortak Sınavlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-main">
+                <h1><i class="fas fa-calendar-alt"></i> Sınav Takvimi</h1>
+                <div class="header-info">
+                    <div class="current-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="currentTime">00:00:00</span>
+                    </div>
+                    <div class="today-date" id="todayDate">
+                        <!-- Will be populated with current date -->
+                    </div>
+                </div>
+            </div>
+            <div class="header-controls">
+                <div class="user-role-selector">
+                    <label for="userRole">Kullanıcı Türü:</label>
+                    <select id="userRole">
+                        <option value="student">Öğrenci</option>
+                        <option value="parent">Veli</option>
+                        <option value="admin">Yönetici</option>
+                    </select>
+                </div>
+                <button id="themeToggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Controls Section -->
+        <section class="controls">
+            <div class="control-group">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Ders, gün veya tarih arayın...">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="filters">
+                    <div class="filter-item">
+                        <label for="gradeFilter">Sınıf:</label>
+                        <select id="gradeFilter" multiple>
+                            <option value="9">9. Sınıf</option>
+                            <option value="10">10. Sınıf</option>
+                            <option value="11">11. Sınıf</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-item">
+                        <label for="weekFilter">Hafta:</label>
+                        <select id="weekFilter">
+                            <option value="all">Tümü</option>
+                            <option value="27-31 EKİM">27-31 Ekim</option>
+                            <option value="3-7 KASIM">3-7 Kasım</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-item">
+                        <label for="viewMode">Görünüm:</label>
+                        <select id="viewMode">
+                            <option value="schedule">Takvim</option>
+                            <option value="list">Liste</option>
+                            <option value="timeline">Zaman Çizelgesi</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group" id="proctorControls" style="display: none;">
+                <div class="proctor-toggle-container">
+                    <label class="proctor-toggle-label">
+                        <input type="checkbox" id="showProctors">
+                        <span class="proctor-toggle-text">Gözetmen Bilgilerini Göster</span>
+                    </label>
+                    <button id="proctorToggle" class="btn btn-secondary" style="margin-left: 1rem;">
+                        <i class="fas fa-user-tie"></i> Gözetmenleri Göster
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="actions">
+                    <button id="refreshBtn" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Yenile
+                    </button>
+                    <button id="exportBtn" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Dışa Aktar
+                    </button>
+                    <button id="printBtn" class="btn btn-secondary">
+                        <i class="fas fa-print"></i> Yazdır
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="statistics" id="statistics">
+            <div class="stat-card">
+                <i class="fas fa-calendar-check"></i>
+                <div class="stat-info">
+                    <h3 id="totalExams">0</h3>
+                    <p>Toplam Sınav</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-info">
+                    <h3 id="totalStudents">0</h3>
+                    <p>Sınav Sayısı</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <div class="stat-info">
+                    <h3 id="upcomingExams">0</h3>
+                    <p>Yaklaşan Sınav</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div class="stat-info">
+                    <h3 id="todayExams">0</h3>
+                    <p>Bugünkü Sınav</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="countdown-section">
+            <div class="countdown-card">
+                <div class="countdown-header">
+                    <i class="fas fa-hourglass-half"></i>
+                    <h3>Sonraki Sınav</h3>
+                </div>
+                <div id="nextExamCountdown" class="countdown-display">
+                    <span class="countdown-empty">Yükleniyor...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="content">
+            <!-- Schedule View -->
+            <div id="scheduleView" class="view-container">
+                <div class="schedule-tabs">
+                    <button class="tab-btn active" data-week="27-31 EKİM">27-31 Ekim 2025</button>
+                    <button class="tab-btn" data-week="3-7 KASIM">3-7 Kasım 2025</button>
+                </div>
+                <div id="scheduleContent" class="schedule-content">
+                    <div class="schedule-legend">
+                        <div class="legend-item">
+                            <span class="legend-color exam-upcoming"></span>
+                            <span>Yaklaşan</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color exam-in_progress"></span>
+                            <span>Devam Eden</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color exam-completed"></span>
+                            <span>Biten</span>
+                        </div>
+                    </div>
+                    <div id="scheduleGrid">
+                        <!-- Schedule grid will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- List View -->
+            <div id="listView" class="view-container hidden">
+                <div class="list-content">
+                    <table id="examTable" class="exam-table">
+                        <thead>
+                            <tr>
+                                <th>Tarih</th>
+                                <th>Gün</th>
+                                <th>Saat</th>
+                                <th>Sınıf</th>
+                                <th>Ders</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examTableBody">
+                            <!-- Table rows will be generated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Timeline View -->
+            <div id="timelineView" class="view-container hidden">
+                <div class="timeline-content">
+                    <div id="timelineContainer" class="timeline">
+                        <!-- Timeline items will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exam Details Modal -->
+        <div id="examModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sınav Detayları</h2>
+                <div id="examDetails">
+                    <!-- Exam details will be shown here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sınav Takvimi Sistemi. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

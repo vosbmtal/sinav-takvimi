@@ -1,0 +1,22 @@
+{
+  "name": "sinav-takvimi",
+  "version": "1.0.0",
+  "description": "Interactive exam schedule management system for 1st semester common exams",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
+  },
+  "keywords": [
+    "exam",
+    "schedule",
+    "education",
+    "turkish",
+    "school",
+    "interactive"
+  ],
+  "author": "Bugra Canata",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
