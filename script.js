@@ -47,12 +47,12 @@ function loadExamData() {
     // Since we can't directly read Excel files in browser JavaScript,
     // I've embedded the exam data extracted from the Excel file
     allExams = [
-        // 27-31 EKİM week
-        { sheet: '27-31 EKİM', timeSlot: '2.DERS', date: '30 EKİM 2025', day: 'PERŞEMBE', exam: '9 EDEBİYAT', grade: '9', subject: 'EDEBİYAT' },
-        { sheet: '27-31 EKİM', timeSlot: '3.DERS', date: '30 EKİM 2025', day: 'PERŞEMBE', exam: '10 DİN KÜLTÜRÜ', grade: '10', subject: 'DİN KÜLTÜRÜ' },
-        { sheet: '27-31 EKİM', timeSlot: '4.DERS', date: '30 EKİM 2025', day: 'PERŞEMBE', exam: '10 FELSEFE', grade: '10', subject: 'FELSEFE' },
-        { sheet: '27-31 EKİM', timeSlot: '5.DERS', date: '30 EKİM 2025', day: 'PERŞEMBE', exam: '9 TARİH', grade: '9', subject: 'TARİH' },
-        { sheet: '27-31 EKİM', timeSlot: '7.DERS', date: '30 EKİM 2025', day: 'PERŞEMBE', exam: '11 SAĞLIK BİL.', grade: '11', subject: 'SAĞLIK BİL.' },
+        // 27-31 EKİM week (updated - exams moved to 18 KASIM)
+        { sheet: '27-31 EKİM', timeSlot: '2.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '9 EDEBİYAT', grade: '9', subject: 'EDEBİYAT' },
+        { sheet: '27-31 EKİM', timeSlot: '3.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '10 DİN KÜLTÜRÜ', grade: '10', subject: 'DİN KÜLTÜRÜ' },
+        { sheet: '27-31 EKİM', timeSlot: '4.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '10 FELSEFE', grade: '10', subject: 'FELSEFE' },
+        { sheet: '27-31 EKİM', timeSlot: '5.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '9 TARİH', grade: '9', subject: 'TARİH' },
+        { sheet: '27-31 EKİM', timeSlot: '7.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '11 SAĞLIK BİL.', grade: '11', subject: 'SAĞLIK BİL.' },
 
         // 3-7 KASIM week
         { sheet: '3-7 KASIM', timeSlot: '2.DERS', date: '3 KASIM 2025', day: 'PAZARTESİ', exam: '9 MES. GEL. AT.', grade: '9', subject: 'MES. GEL. AT.' },
@@ -91,91 +91,6 @@ function loadExamData() {
 
     filteredExams = [...allExams];
 }
-
-// Proctor data for October 30th exams
-const proctorData = {
-    '30 EKİM 2025': {
-        '2.DERS': {
-            exam: '9 EDEBİYAT',
-            mainProctor: 'ÖZGE AYDIN',
-            location: 'MAT2',
-            proctors: {
-                'AV': 'ÖZGE AYDIN',
-                'A': 'ŞEVKET BUĞRA CANATA',
-                'B': 'ALİ ÖZKAN ÇELİKLER',
-                'C': 'FATİH AKKOÇ',
-                'D': 'ELİF AZBAY',
-                'E': 'MEHMET AĞCA',
-                'F': 'EVREN IŞIK'
-            },
-            additionalInfo: {
-                'C': 'DİN2'
-            }
-        },
-        '3.DERS': {
-            exam: '10 DİN KÜLTÜRÜ',
-            mainProctor: 'ÖZGE AYDIN',
-            location: '',
-            proctors: {
-                'AV': 'ABDURRAHMAN GÜNER',
-                'A': 'KAĞAN BAHADIR DURGUT',
-                'B': 'RECEP SARIKAYA',
-                'C': 'HALİME İNÇAMUR',
-                'D': 'MERVE OCAKLI',
-                'E': 'MERVE OCAKLI',
-                'F': 'ELİF AZBAY'
-            },
-            additionalInfo: {
-                'B': 'Y.DİL2'
-            }
-        },
-        '4.DERS': {
-            exam: '10 FELSEFE',
-            mainProctor: 'ÖZGE AYDIN',
-            location: '',
-            proctors: {
-                'AV': 'ABDURRAHMAN GÜNER',
-                'A': 'KAĞAN BAHADIR DURGUT',
-                'B': 'RECEP SARIKAYA',
-                'C': 'HALİME İNÇAMUR',
-                'D': 'MERVE OCAKLI',
-                'E': 'MERVE OCAKLI',
-                'F': 'ELİF AZBAY'
-            },
-            additionalInfo: {
-                'B': 'FELSEFE'
-            }
-        },
-        '5.DERS': {
-            exam: '9 TARİH',
-            mainProctor: 'ÖZGE AYDIN',
-            location: '',
-            proctors: {
-                'AV': 'HİLAL ARIKAN',
-                'A': 'ELİF AZBAY',
-                'B': 'ALİ ÖZKAN ÇELİKLER',
-                'C': 'HİMMET SEVİNÇ',
-                'D': 'ŞEVKET BUĞRA CANATA',
-                'E': 'NURAY MERAL',
-                'F': 'NAGİHAN KARAKAYA'
-            }
-        },
-        '7.DERS': {
-            exam: '11 SAĞLIK BİL.',
-            mainProctor: 'ÖZGE AYDIN',
-            location: '',
-            proctors: {
-                'AV': 'RAMAZAN GENÇDAL',
-                'A': 'FATİH AKKOÇ',
-                'B': 'MERVE OCAKLI',
-                'C': 'ÖZKAN KAYA',
-                'D': 'TURAN TURNA',
-                'E': 'NURCAN DURMAZ',
-                'F': 'ÖZKAN KAYA'
-            }
-        }
-    }
-};
 
 // Initialize real-time clock
 function initializeClock() {
@@ -463,22 +378,6 @@ function initializeEventListeners() {
     document.getElementById('exportBtn').addEventListener('click', exportData);
     document.getElementById('printBtn').addEventListener('click', printSchedule);
 
-    // Proctor view toggle
-    const showProctorsCheckbox = document.getElementById('showProctors');
-    if (showProctorsCheckbox) {
-        showProctorsCheckbox.addEventListener('change', toggleProctorView);
-    }
-
-    // Proctor toggle button
-    const proctorToggle = document.getElementById('proctorToggle');
-    if (proctorToggle) {
-        proctorToggle.addEventListener('click', function() {
-            const checkbox = document.getElementById('showProctors');
-            checkbox.checked = !checkbox.checked;
-            toggleProctorView();
-        });
-    }
-
     // Schedule tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -623,7 +522,6 @@ function renderScheduleView() {
 function createScheduleGrid(exams) {
     const timeSlots = ['2.DERS', '3.DERS', '4.DERS', '5.DERS', '6.DERS', '7.DERS', '8.DERS', '9.DERS'];
     const days = ['PAZARTESİ', 'SALI', 'ÇARŞAMBA', 'PERŞEMBE', 'CUMA'];
-    const showProctors = document.getElementById('showProctors').checked;
 
     let html = '<table class="schedule-table"><thead><tr><th>Saat<br><small>Start-End</small></th>';
 
@@ -645,29 +543,11 @@ function createScheduleGrid(exams) {
             const exam = exams.find(e => e.day === day && e.timeSlot === timeSlot);
             if (exam) {
                 const status = getExamStatus(exam);
-                const proctorInfo = showProctors ? getProctorInfo(exam) : null;
-
-                let proctorHTML = '';
-                if (proctorInfo) {
-                    proctorHTML = `
-                        <div class="proctor-info">
-                            <div class="proctor-main">👤 ${proctorInfo.mainProctor}</div>
-                            <div class="proctor-details">
-                                ${Object.entries(proctorInfo.proctors).map(([shube, gorevli]) =>
-                                    `<div class="proctor-shube"><span class="proctor-name">${gorevli}</span></div>`
-                                ).join('')}
-                            </div>
-                            ${proctorInfo.location ? `<div class="proctor-location">📍 ${proctorInfo.location}</div>` : ''}
-                        </div>
-                    `;
-                }
-
                 html += `
                     <td>
                         <div class="exam-cell exam-${status}" onclick="showExamDetails('${exam.exam}', '${exam.date}', '${exam.timeSlot}', '${exam.grade}')">
                             ${exam.exam}
                         </div>
-                        ${proctorHTML}
                     </td>
                 `;
             } else {
@@ -685,7 +565,6 @@ function createScheduleGrid(exams) {
 // Render list view
 function renderListView() {
     const tbody = document.getElementById('examTableBody');
-    const showProctors = document.getElementById('showProctors').checked;
 
     // Sort exams by date and time
     const sortedExams = [...filteredExams].sort((a, b) => {
@@ -699,25 +578,6 @@ function renderListView() {
     sortedExams.forEach(exam => {
         const status = getExamStatus(exam);
         const timeInfo = timeSlotMapping[exam.timeSlot];
-        const proctorInfo = showProctors ? getProctorInfo(exam) : null;
-
-        let proctorHTML = '';
-        if (proctorInfo) {
-            const proctorsList = Object.entries(proctorInfo.proctors)
-                .slice(0, 3) // Show first 3 proctors to save space
-                .map(([shube, gorevli]) => `${gorevli} (${shube})`)
-                .join(', ');
-
-            proctorHTML = `
-                <div class="proctor-info" style="display: ${showProctors ? 'block' : 'none'}">
-                    <div class="proctor-main">👤 Sorumlu: ${proctorInfo.mainProctor}</div>
-                    <div class="proctor-details">
-                        <strong>Gözetmenler:</strong> ${proctorsList}${Object.keys(proctorInfo.proctors).length > 3 ? ` +${Object.keys(proctorInfo.proctors).length - 3}...` : ''}
-                    </div>
-                    ${proctorInfo.location ? `<div class="proctor-location">📍 ${proctorInfo.location}</div>` : ''}
-                </div>
-            `;
-        }
 
         html += `
             <tr class="exam-row exam-${status}">
@@ -728,7 +588,6 @@ function renderListView() {
                 <td>
                     <span class="exam-subject">${exam.exam}</span>
                     <span class="exam-status status-${status}">${getStatusText(status)}</span>
-                    ${proctorHTML}
                 </td>
                 <td>
                     <button class="btn btn-primary" onclick="showExamDetails('${exam.exam}', '${exam.date}', '${exam.timeSlot}', '${exam.grade}')" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
@@ -755,37 +614,13 @@ function getStatusText(status) {
 
 // Get proctor information for an exam
 function getProctorInfo(exam) {
-    if (!exam || !exam.date || !exam.timeSlot) return null;
-
-    const dateProctors = proctorData[exam.date];
-    if (!dateProctors) return null;
-
-    return dateProctors[exam.timeSlot] || null;
-}
-
-// Toggle proctor view
-function toggleProctorView() {
-    const showProctors = document.getElementById('showProctors').checked;
-    const proctorElements = document.querySelectorAll('.proctor-info');
-
-    proctorElements.forEach(element => {
-        element.style.display = showProctors ? 'block' : 'none';
-    });
-
-    // Update view mode button text
-    const proctorToggle = document.getElementById('proctorToggle');
-    if (proctorToggle) {
-        proctorToggle.textContent = showProctors ? 'Gözetmenleri Gizle' : 'Gözetmenleri Göster';
-    }
-
-    // Re-render current view to update proctor display
-    updateCurrentView();
+    // Proctor information removed - will be updated later
+    return null;
 }
 
 // Render timeline view
 function renderTimelineView() {
     const timelineContainer = document.getElementById('timelineContainer');
-    const showProctors = document.getElementById('showProctors').checked;
 
     // Sort exams by date
     const sortedExams = [...filteredExams].sort((a, b) => {
@@ -827,22 +662,6 @@ function renderTimelineView() {
         exams.forEach(exam => {
             const status = getExamStatus(exam);
             const timeInfo = timeSlotMapping[exam.timeSlot];
-            const proctorInfo = showProctors ? getProctorInfo(exam) : null;
-
-            let proctorHTML = '';
-            if (proctorInfo) {
-                proctorHTML = `
-                    <div class="proctor-info" style="display: ${showProctors ? 'block' : 'none'}; margin-top: 0.5rem;">
-                        <div class="proctor-main">👤 ${proctorInfo.mainProctor}</div>
-                        <div class="proctor-details" style="font-size: 0.7rem;">
-                            ${Object.entries(proctorInfo.proctors).slice(0, 2).map(([shube, gorevli]) =>
-                                `<span class="proctor-shube">${gorevli} (${shube})</span>`
-                            ).join(' ')}
-                            ${Object.keys(proctorInfo.proctors).length > 2 ? `+${Object.keys(proctorInfo.proctors).length - 2}` : ''}
-                        </div>
-                    </div>
-                `;
-            }
 
             html += `
                 <div class="exam-item exam-${status}" onclick="showExamDetails('${exam.exam}', '${exam.date}', '${exam.timeSlot}', '${exam.grade}')">
@@ -856,7 +675,6 @@ function renderTimelineView() {
                             <span class="grade-badge">${exam.grade}. Sınıf</span>
                             <span class="exam-status status-${status}">${getStatusText(status)}</span>
                         </div>
-                        ${proctorHTML}
                     </div>
                 </div>
             `;
@@ -894,30 +712,6 @@ function showExamDetails(exam, date, timeSlot, grade) {
     const timeInfo = timeSlotMapping[timeSlot];
     const status = getExamStatus({ exam, date, timeSlot, grade });
     const examDate = parseExamDate(date);
-    const proctorInfo = getProctorInfo({ exam, date, timeSlot, grade });
-
-    let proctorHTML = '';
-    if (proctorInfo) {
-        const proctorsList = Object.entries(proctorInfo.proctors).map(([shube, gorevli]) => {
-            const additionalInfo = proctorInfo.additionalInfo && proctorInfo.additionalInfo[shube] ? ` (${proctorInfo.additionalInfo[shube]})` : '';
-            return `<li><strong>${shube} Şube:</strong> ${gorevli}${additionalInfo}</li>`;
-        }).join('');
-
-        proctorHTML = `
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(46, 204, 113, 0.1); border-radius: 8px; border-left: 4px solid #2ecc71;">
-                <h4 style="margin-bottom: 0.5rem; color: #27ae60; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fas fa-user-tie"></i> Gözetmen Bilgileri
-                </h4>
-                <div style="margin-bottom: 0.5rem;">
-                    <strong>Sorumlu Gözetmen:</strong> ${proctorInfo.mainProctor}
-                    ${proctorInfo.location ? `<br><strong>Mekan:</strong> ${proctorInfo.location}` : ''}
-                </div>
-                <ul style="text-align: left; margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
-                    ${proctorsList}
-                </ul>
-            </div>
-        `;
-    }
 
     details.innerHTML = `
         <div style="text-align: center;">
@@ -944,7 +738,6 @@ function showExamDetails(exam, date, timeSlot, grade) {
                     Süre: ${calculateExamDuration(timeInfo.start, timeInfo.end)} dakika
                 </div>
             </div>
-            ${proctorHTML}
         </div>
     `;
 
@@ -1004,26 +797,22 @@ function updateUIForUserRole() {
     // Show/hide features based on user role
     const exportBtn = document.getElementById('exportBtn');
     const printBtn = document.getElementById('printBtn');
-    const proctorControls = document.getElementById('proctorControls');
 
     switch (currentUserRole) {
         case 'student':
-            // Students can view and search, but no proctor info
+            // Students can view and search
             exportBtn.style.display = 'inline-flex';
             printBtn.style.display = 'inline-flex';
-            if (proctorControls) proctorControls.style.display = 'none';
             break;
         case 'parent':
-            // Parents have same access as students, but can see proctor info
+            // Parents have same access as students
             exportBtn.style.display = 'inline-flex';
             printBtn.style.display = 'inline-flex';
-            if (proctorControls) proctorControls.style.display = 'flex';
             break;
         case 'admin':
-            // Admins have full access including proctor management
+            // Admins have full access
             exportBtn.style.display = 'inline-flex';
             printBtn.style.display = 'inline-flex';
-            if (proctorControls) proctorControls.style.display = 'flex';
             break;
     }
 
