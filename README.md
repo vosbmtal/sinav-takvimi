@@ -6,7 +6,7 @@ A comprehensive web application for managing and viewing 1st semester common exa
 
 ### Core Functionality
 - **Real-time Clock** - Live current time display
-- **Exam Schedule** - Complete schedule for 27-31 Ekim and 3-7 Kasım 2025
+- **Exam Schedule** - Complete schedule for 27-31 Ekim, 3-7 Kasım, and 18 Kasım 2025
 - **Multiple View Modes**:
   - Schedule Grid View
   - List View

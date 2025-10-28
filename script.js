@@ -47,12 +47,12 @@ function loadExamData() {
     // Since we can't directly read Excel files in browser JavaScript,
     // I've embedded the exam data extracted from the Excel file
     allExams = [
-        // 27-31 EKİM week (updated - exams moved to 18 KASIM)
-        { sheet: '27-31 EKİM', timeSlot: '2.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '9 EDEBİYAT', grade: '9', subject: 'EDEBİYAT' },
-        { sheet: '27-31 EKİM', timeSlot: '3.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '10 DİN KÜLTÜRÜ', grade: '10', subject: 'DİN KÜLTÜRÜ' },
-        { sheet: '27-31 EKİM', timeSlot: '4.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '10 FELSEFE', grade: '10', subject: 'FELSEFE' },
-        { sheet: '27-31 EKİM', timeSlot: '5.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '9 TARİH', grade: '9', subject: 'TARİH' },
-        { sheet: '27-31 EKİM', timeSlot: '7.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '11 SAĞLIK BİL.', grade: '11', subject: 'SAĞLIK BİL.' },
+        // Exams originally in 27-31 EKİM week (moved to 18 KASIM)
+        { sheet: '18 KASIM', timeSlot: '2.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '9 EDEBİYAT', grade: '9', subject: 'EDEBİYAT' },
+        { sheet: '18 KASIM', timeSlot: '3.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '10 DİN KÜLTÜRÜ', grade: '10', subject: 'DİN KÜLTÜRÜ' },
+        { sheet: '18 KASIM', timeSlot: '4.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '10 FELSEFE', grade: '10', subject: 'FELSEFE' },
+        { sheet: '18 KASIM', timeSlot: '5.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '9 TARİH', grade: '9', subject: 'TARİH' },
+        { sheet: '18 KASIM', timeSlot: '7.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '11 SAĞLIK BİL.', grade: '11', subject: 'SAĞLIK BİL.' },
 
         // 3-7 KASIM week
         { sheet: '3-7 KASIM', timeSlot: '2.DERS', date: '3 KASIM 2025', day: 'PAZARTESİ', exam: '9 MES. GEL. AT.', grade: '9', subject: 'MES. GEL. AT.' },
@@ -520,7 +520,8 @@ function renderScheduleView() {
 
 // Create schedule grid
 function createScheduleGrid(exams) {
-    const timeSlots = ['2.DERS', '3.DERS', '4.DERS', '5.DERS', '6.DERS', '7.DERS', '8.DERS', '9.DERS'];
+    // Include all time slots from 1.DERS to 10.DERS
+    const timeSlots = Object.keys(timeSlotMapping);
     const days = ['PAZARTESİ', 'SALI', 'ÇARŞAMBA', 'PERŞEMBE', 'CUMA'];
 
     let html = '<table class="schedule-table"><thead><tr><th>Saat<br><small>Start-End</small></th>';
@@ -781,12 +782,17 @@ function updateStatistics() {
     document.getElementById('upcomingExams').textContent = upcomingExams.length;
 
     // Count today's exams
-    const todayExams = filteredExams.filter(exam => {
+    const todayDate = new Date();
+    todayDate.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(todayDate);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const todaysExams = filteredExams.filter(exam => {
         const examDate = parseExamDate(exam.date);
-        const status = getExamStatus(exam);
-        return status === 'in_progress' || status === 'upcoming';
+        examDate.setHours(0, 0, 0, 0);
+        return examDate.getTime() === todayDate.getTime();
     });
-    document.getElementById('todayExams').textContent = todayExams.length;
+    document.getElementById('todayExams').textContent = todaysExams.length;
 
     // Update countdown immediately
     updateCurrentTimeIndicators();

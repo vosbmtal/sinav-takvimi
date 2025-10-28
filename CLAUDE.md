@@ -15,6 +15,7 @@ The Excel file contains multiple sheets, each representing a different week's ex
 
 - **27-31 EKİM**: Exam schedule for October 27-31, 2025
 - **3-7 KASIM**: Exam schedule for November 3-7, 2025
+- **18 KASIM**: Additional exam day for November 18, 2025
 
 Each sheet follows this structure:
 - Row 3: Date headers (Monday through Friday with full dates)
