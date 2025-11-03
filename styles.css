@@ -890,6 +890,8 @@ body.dark-theme .filter-item select {
     border-radius: var(--border-radius);
     width: 90%;
     max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
     box-shadow: var(--shadow-hover);
     animation: slideIn 0.3s ease;
     position: relative;

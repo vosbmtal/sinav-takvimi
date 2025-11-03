@@ -44,49 +44,1512 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Load exam data from Excel file structure (simulated with embedded data)
 function loadExamData() {
-    // Since we can't directly read Excel files in browser JavaScript,
-    // I've embedded the exam data extracted from the Excel file
+    // Exam data extracted from program.xlsx with proctor information
     allExams = [
-        // Exams originally in 27-31 EKİM week (moved to 18 KASIM)
-        { sheet: '18 KASIM', timeSlot: '2.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '9 EDEBİYAT', grade: '9', subject: 'EDEBİYAT' },
-        { sheet: '18 KASIM', timeSlot: '3.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '10 DİN KÜLTÜRÜ', grade: '10', subject: 'DİN KÜLTÜRÜ' },
-        { sheet: '18 KASIM', timeSlot: '4.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '10 FELSEFE', grade: '10', subject: 'FELSEFE' },
-        { sheet: '18 KASIM', timeSlot: '5.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '9 TARİH', grade: '9', subject: 'TARİH' },
-        { sheet: '18 KASIM', timeSlot: '7.DERS', date: '18 KASIM 2025', day: 'SALI', exam: '11 SAĞLIK BİL.', grade: '11', subject: 'SAĞLIK BİL.' },
-
-        // 3-7 KASIM week
-        { sheet: '3-7 KASIM', timeSlot: '2.DERS', date: '3 KASIM 2025', day: 'PAZARTESİ', exam: '9 MES. GEL. AT.', grade: '9', subject: 'MES. GEL. AT.' },
-        { sheet: '3-7 KASIM', timeSlot: '2.DERS', date: '4 KASIM 2025', day: 'SALI', exam: '9 FİZİK', grade: '9', subject: 'FİZİK' },
-        { sheet: '3-7 KASIM', timeSlot: '2.DERS', date: '5 KASIM 2025', day: 'ÇARŞAMBA', exam: '9 KİMYA', grade: '9', subject: 'KİMYA' },
-        { sheet: '3-7 KASIM', timeSlot: '3.DERS', date: '3 KASIM 2025', day: 'PAZARTESİ', exam: '11 ORT. TÜRK TAR.', grade: '11', subject: 'ORT. TÜRK TAR.' },
-        { sheet: '3-7 KASIM', timeSlot: '3.DERS', date: '4 KASIM 2025', day: 'SALI', exam: '11. S.MES. YAB. DİL', grade: '11', subject: 'S.MES. YAB. DİL' },
-        { sheet: '3-7 KASIM', timeSlot: '3.DERS', date: '5 KASIM 2025', day: 'ÇARŞAMBA', exam: '11 DİN KÜLTÜRÜ', grade: '11', subject: 'DİN KÜLTÜRÜ' },
-        { sheet: '3-7 KASIM', timeSlot: '3.DERS', date: '6 KASIM 2025', day: 'PERŞEMBE', exam: '9 MATEMATİK', grade: '9', subject: 'MATEMATİK' },
-        { sheet: '3-7 KASIM', timeSlot: '3.DERS', date: '7 KASIM 2025', day: 'CUMA', exam: '9 S. PEYG. HAYATI', grade: '9', subject: 'S. PEYG. HAYATI' },
-        { sheet: '3-7 KASIM', timeSlot: '4.DERS', date: '3 KASIM 2025', day: 'PAZARTESİ', exam: '10 MATEMATİK', grade: '10', subject: 'MATEMATİK' },
-        { sheet: '3-7 KASIM', timeSlot: '4.DERS', date: '4 KASIM 2025', day: 'SALI', exam: '10 FİZİK', grade: '10', subject: 'FİZİK' },
-        { sheet: '3-7 KASIM', timeSlot: '4.DERS', date: '5 KASIM 2025', day: 'ÇARŞAMBA', exam: '10 KİMYA', grade: '10', subject: 'KİMYA' },
-        { sheet: '3-7 KASIM', timeSlot: '4.DERS', date: '6 KASIM 2025', day: 'PERŞEMBE', exam: '10 S. PROJE', grade: '10', subject: 'S. PROJE' },
-        { sheet: '3-7 KASIM', timeSlot: '4.DERS', date: '7 KASIM 2025', day: 'CUMA', exam: '10 S. TEM. DİNİ BİL.', grade: '10', subject: 'S. TEM. DİNİ BİL.' },
-        { sheet: '3-7 KASIM', timeSlot: '5.DERS', date: '4 KASIM 2025', day: 'SALI', exam: '9 S. PROJE', grade: '9', subject: 'S. PROJE' },
-        { sheet: '3-7 KASIM', timeSlot: '5.DERS', date: '5 KASIM 2025', day: 'ÇARŞAMBA', exam: '9 S. DÜŞÜNME EĞ.', grade: '9', subject: 'S. DÜŞÜNME EĞ.' },
-        { sheet: '3-7 KASIM', timeSlot: '5.DERS', date: '6 KASIM 2025', day: 'PERŞEMBE', exam: '11 S. MATEMATİK', grade: '11', subject: 'S. MATEMATİK' },
-        { sheet: '3-7 KASIM', timeSlot: '5.DERS', date: '7 KASIM 2025', day: 'CUMA', exam: '9 S. ADABI MUA.', grade: '9', subject: 'S. ADABI MUA.' },
-        { sheet: '3-7 KASIM', timeSlot: '6.DERS', date: '3 KASIM 2025', day: 'PAZARTESİ', exam: '9 DİN KÜLTÜRÜ', grade: '9', subject: 'DİN KÜLTÜRÜ' },
-        { sheet: '3-7 KASIM', timeSlot: '6.DERS', date: '4 KASIM 2025', day: 'SALI', exam: '11 YAB. DİL', grade: '11', subject: 'YAB. DİL' },
-        { sheet: '3-7 KASIM', timeSlot: '6.DERS', date: '5 KASIM 2025', day: 'ÇARŞAMBA', exam: '11 EDEBİYAT', grade: '11', subject: 'EDEBİYAT' },
-        { sheet: '3-7 KASIM', timeSlot: '6.DERS', date: '6 KASIM 2025', day: 'PERŞEMBE', exam: '11 FELSEFE', grade: '11', subject: 'FELSEFE' },
-        { sheet: '3-7 KASIM', timeSlot: '6.DERS', date: '7 KASIM 2025', day: 'CUMA', exam: '11 S. PEY. HAYATI', grade: '11', subject: 'S. PEY. HAYATI' },
-        { sheet: '3-7 KASIM', timeSlot: '7.DERS', date: '3 KASIM 2025', day: 'PAZARTESİ', exam: '10 COĞRAFYA', grade: '10', subject: 'COĞRAFYA' },
-        { sheet: '3-7 KASIM', timeSlot: '7.DERS', date: '4 KASIM 2025', day: 'SALI', exam: '10 EDEBİYAT', grade: '10', subject: 'EDEBİYAT' },
-        { sheet: '3-7 KASIM', timeSlot: '7.DERS', date: '5 KASIM 2025', day: 'ÇARŞAMBA', exam: '10 TARİH', grade: '10', subject: 'TARİH' },
-        { sheet: '3-7 KASIM', timeSlot: '7.DERS', date: '6 KASIM 2025', day: 'PERŞEMBE', exam: '10 S. TÜRK S.H.AİLE', grade: '10', subject: 'S. TÜRK S.H.AİLE' },
-        { sheet: '3-7 KASIM', timeSlot: '7.DERS', date: '7 KASIM 2025', day: 'CUMA', exam: '10. YAB. DİL', grade: '10', subject: 'YAB. DİL' },
-        { sheet: '3-7 KASIM', timeSlot: '8.DERS', date: '3 KASIM 2025', day: 'PAZARTESİ', exam: '11 TARİH', grade: '11', subject: 'TARİH' },
-        { sheet: '3-7 KASIM', timeSlot: '8.DERS', date: '4 KASIM 2025', day: 'SALI', exam: '9 YAB. DİL', grade: '9', subject: 'YAB. DİL' },
-        { sheet: '3-7 KASIM', timeSlot: '8.DERS', date: '5 KASIM 2025', day: 'ÇARŞAMBA', exam: '9 BİYOLOJİ', grade: '9', subject: 'BİYOLOJİ' },
-        { sheet: '3-7 KASIM', timeSlot: '8.DERS', date: '6 KASIM 2025', day: 'PERŞEMBE', exam: '10 BİYOLOJİ', grade: '10', subject: 'BİYOLOJİ' },
-        { sheet: '3-7 KASIM', timeSlot: '8.DERS', date: '7 KASIM 2025', day: 'CUMA', exam: '9 COĞRAFYA', grade: '9', subject: 'COĞRAFYA' }
+        {
+            sheet: '3 KASIM',
+            timeSlot: '2.DERS',
+            date: '3 KASIM 2025',
+            day: 'PAZARTESİ',
+            exam: '9 MESLEKİ GELİŞİM ATÖLYESİ',
+            grade: '9',
+            subject: 'MESLEKİ GELİŞİM ATÖLYESİ',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'BAHAR SARIKAYA',
+                    location: 'DİKAB - 2'
+                },
+                {
+                    section: 'A',
+                    name: 'NURCAN DURMAZ'
+                },
+                {
+                    section: 'B',
+                    name: 'BÜŞRA TARIM',
+                    location: 'MAT-1'
+                },
+                {
+                    section: 'C',
+                    name: 'KENAN ANGÜN'
+                },
+                {
+                    section: 'D',
+                    name: 'TURAN TURNA'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'BESTAMİ KILINÇ'
+                }
+            ]
+        },
+        {
+            sheet: '3 KASIM',
+            timeSlot: '3.DERS',
+            date: '3 KASIM 2025',
+            day: 'PAZARTESİ',
+            exam: '11 ORTAK TÜRK TARİHİ',
+            grade: '11',
+            subject: 'ORTAK TÜRK TARİHİ',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ELİF AZBAY'
+                },
+                {
+                    section: 'A',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'B',
+                    name: 'ÖZKAN KAYA'
+                },
+                {
+                    section: 'C',
+                    name: 'ŞEVKET BUĞRA CANATA'
+                },
+                {
+                    section: 'D',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'E',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'F',
+                    name: 'ŞEVKET BUĞRA CANATA'
+                }
+            ]
+        },
+        {
+            sheet: '3 KASIM',
+            timeSlot: '4.DERS',
+            date: '3 KASIM 2025',
+            day: 'PAZARTESİ',
+            exam: '10 MATEMATİK',
+            grade: '10',
+            subject: 'MATEMATİK',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'BAHAR SARIKAYA'
+                },
+                {
+                    section: 'A',
+                    name: 'ONUR TÜRE'
+                },
+                {
+                    section: 'B',
+                    name: 'GÜLBEN KARABULUT'
+                },
+                {
+                    section: 'C',
+                    name: 'ÖZLEM YETİM'
+                },
+                {
+                    section: 'D',
+                    name: 'HÜLYA BAHTİYAR'
+                },
+                {
+                    section: 'E',
+                    name: 'HÜLYA BAHTİYAR'
+                },
+                {
+                    section: 'F',
+                    name: 'RECEP SARIKAYA'
+                }
+            ]
+        },
+        {
+            sheet: '3 KASIM',
+            timeSlot: '6.DERS',
+            date: '3 KASIM 2025',
+            day: 'PAZARTESİ',
+            exam: '9 DİN KÜLTÜRÜ',
+            grade: '9',
+            subject: 'DİN KÜLTÜRÜ',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ELİF AZBAY'
+                },
+                {
+                    section: 'A',
+                    name: 'NURCAN DURMAZ',
+                    location: 'Y.DİL-2'
+                },
+                {
+                    section: 'B',
+                    name: 'BAHAR SARIKAYA',
+                    location: 'Y.DİL-1'
+                },
+                {
+                    section: 'C',
+                    name: 'ÖZLEM YETİM'
+                },
+                {
+                    section: 'D',
+                    name: 'RECEP GÜDÜCÜ',
+                    location: 'EDEB-3'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'MERVE OCAKLI'
+                }
+            ]
+        },
+        {
+            sheet: '3 KASIM',
+            timeSlot: '7.DERS',
+            date: '3 KASIM 2025',
+            day: 'PAZARTESİ',
+            exam: '10 COĞRAFYA',
+            grade: '10',
+            subject: 'COĞRAFYA',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'A',
+                    name: 'BEKİR BAŞAR'
+                },
+                {
+                    section: 'B',
+                    name: 'GÜLBEN KARABULUT'
+                },
+                {
+                    section: 'C',
+                    name: 'KENAN ANGÜN'
+                },
+                {
+                    section: 'D',
+                    name: 'RECEP SARIKAYA',
+                    location: 'EDEB-3'
+                },
+                {
+                    section: 'E',
+                    name: 'RECEP SARIKAYA',
+                    location: 'EDEB-3'
+                },
+                {
+                    section: 'F',
+                    name: 'HÜLYA BAHTİYAR'
+                }
+            ]
+        },
+        {
+            sheet: '3 KASIM',
+            timeSlot: '8.DERS',
+            date: '3 KASIM 2025',
+            day: 'PAZARTESİ',
+            exam: '11 TARİH',
+            grade: '11',
+            subject: 'TARİH',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'BAHAR SARIKAYA'
+                },
+                {
+                    section: 'A',
+                    name: 'MEHTAP PÜLGİR'
+                },
+                {
+                    section: 'B',
+                    name: 'RECEP SARIKAYA'
+                },
+                {
+                    section: 'C',
+                    name: 'AHMET CARİ'
+                },
+                {
+                    section: 'D',
+                    name: 'MEHTAP PÜLGİR'
+                },
+                {
+                    section: 'E',
+                    name: 'MEHTAP PÜLGİR'
+                },
+                {
+                    section: 'F',
+                    name: 'NUH SATILMIŞ'
+                }
+            ]
+        },
+        {
+            sheet: '4 KASIM',
+            timeSlot: '2.DERS',
+            date: '4 KASIM 2025',
+            day: 'SALI',
+            exam: '9 FİZİK',
+            grade: '9',
+            subject: 'FİZİK',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ALİ ÖZKAN ÇELİKLER'
+                },
+                {
+                    section: 'A',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'B',
+                    name: 'MERVE OCAKLI'
+                },
+                {
+                    section: 'C',
+                    name: 'BAHAR SARIKAYA',
+                    location: 'BİYOLOJİ LAB'
+                },
+                {
+                    section: 'D',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'E',
+                    name: 'HİLAL ARIKAN'
+                },
+                {
+                    section: 'F',
+                    name: 'ESRA AKBAŞ GÜLLER'
+                }
+            ]
+        },
+        {
+            sheet: '4 KASIM',
+            timeSlot: '3.DERS',
+            date: '4 KASIM 2025',
+            day: 'SALI',
+            exam: '11 S. MESLEKİ YABANCI DİL',
+            grade: '11',
+            subject: 'S. MESLEKİ YABANCI DİL',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ONUR KALABAK'
+                },
+                {
+                    section: 'A',
+                    name: 'KAĞAN BAHADIR DURGUT'
+                },
+                {
+                    section: 'B',
+                    name: 'HABİB GÖZLER'
+                },
+                {
+                    section: 'C',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'D',
+                    name: 'RECEP GÜDÜCÜ'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                }
+            ]
+        },
+        {
+            sheet: '4 KASIM',
+            timeSlot: '4.DERS',
+            date: '4 KASIM 2025',
+            day: 'SALI',
+            exam: '10 FİZİK',
+            grade: '10',
+            subject: 'FİZİK',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'GÜLBEN KARABULUT'
+                },
+                {
+                    section: 'A',
+                    name: 'RECEP SARIKAYA',
+                    location: 'EDEB - 3'
+                },
+                {
+                    section: 'B',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'C',
+                    name: 'SÜLEYMAN ÜNAL'
+                },
+                {
+                    section: 'D',
+                    name: 'TURAN TURNA'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'BEYHAN GENÇAĞ'
+                }
+            ]
+        },
+        {
+            sheet: '4 KASIM',
+            timeSlot: '5.DERS',
+            date: '4 KASIM 2025',
+            day: 'SALI',
+            exam: '9. S.PROJE',
+            grade: '9',
+            subject: 'S.PROJE',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ALİ ÖZKAN ÇELİKLER'
+                },
+                {
+                    section: 'A',
+                    name: 'BEKİR BAŞAR'
+                },
+                {
+                    section: 'B',
+                    name: 'KENAN ANGÜN'
+                },
+                {
+                    section: 'C',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'D',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'E',
+                    name: 'HALİME İNÇAMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'MERVE OCAKLI'
+                }
+            ]
+        },
+        {
+            sheet: '4 KASIM',
+            timeSlot: '6.DERS',
+            date: '4 KASIM 2025',
+            day: 'SALI',
+            exam: '11 YABANCI DİL',
+            grade: '11',
+            subject: 'YABANCI DİL',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'RECEP SARIKAYA'
+                },
+                {
+                    section: 'A',
+                    name: 'KAĞAN BAHADIR DURGUT'
+                },
+                {
+                    section: 'B',
+                    name: 'ONUR KALABAK'
+                },
+                {
+                    section: 'C',
+                    name: 'MEHTAP PÜLGİR'
+                },
+                {
+                    section: 'D',
+                    name: 'RECEP GÜDÜCÜ'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'MEHTAP PÜLGİR'
+                }
+            ]
+        },
+        {
+            sheet: '4 KASIM',
+            timeSlot: '7.DERS',
+            date: '4 KASIM 2025',
+            day: 'SALI',
+            exam: '10 EDEBİYAT',
+            grade: '10',
+            subject: 'EDEBİYAT',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'A',
+                    name: 'NAGİHAN KARAKAYA'
+                },
+                {
+                    section: 'B',
+                    name: 'MEHMET AĞCA',
+                    location: 'COĞRAFYA'
+                },
+                {
+                    section: 'C',
+                    name: 'SÜLEYMAN ÜNAL'
+                },
+                {
+                    section: 'D',
+                    name: 'TURAN TURNA'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'AHMET CARİ'
+                }
+            ]
+        },
+        {
+            sheet: '4 KASIM',
+            timeSlot: '8.DERS',
+            date: '4 KASIM 2025',
+            day: 'SALI',
+            exam: '9 YABANCI DİL',
+            grade: '9',
+            subject: 'YABANCI DİL',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'A',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'B',
+                    name: 'GÜLBEN KARABULUT'
+                },
+                {
+                    section: 'C',
+                    name: 'BEKİR BAŞAR'
+                },
+                {
+                    section: 'D',
+                    name: 'ÖZLEM YETİM'
+                },
+                {
+                    section: 'E',
+                    name: 'HANDAN NİSA ANEMİKAYE',
+                    location: 'Y.DİL -2'
+                },
+                {
+                    section: 'F',
+                    name: 'KENAN ANGÜN'
+                }
+            ]
+        },
+        {
+            sheet: '5 KASIM',
+            timeSlot: '2.DERS',
+            date: '5 KASIM 2025',
+            day: 'ÇARŞAMBA',
+            exam: '9 KİMYA',
+            grade: '9',
+            subject: 'KİMYA',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'HALİME İNÇAMUR'
+                },
+                {
+                    section: 'A',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'B',
+                    name: 'ELİF AZBAY'
+                },
+                {
+                    section: 'C',
+                    name: 'FATİH AKKOÇ'
+                },
+                {
+                    section: 'D',
+                    name: 'BEKİR BAŞAR'
+                },
+                {
+                    section: 'E',
+                    name: 'BAHAR SARIKAYA',
+                    location: 'DİKAB -1'
+                },
+                {
+                    section: 'F',
+                    name: 'HİMMET SEVİNÇ'
+                }
+            ]
+        },
+        {
+            sheet: '5 KASIM',
+            timeSlot: '3.DERS',
+            date: '5 KASIM 2025',
+            day: 'ÇARŞAMBA',
+            exam: '11 DİN KÜLTÜRÜ',
+            grade: '11',
+            subject: 'DİN KÜLTÜRÜ',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'A',
+                    name: 'BAHAR SARIKAYA'
+                },
+                {
+                    section: 'B',
+                    name: 'HANDAN NİSA ANEMİKAYE'
+                },
+                {
+                    section: 'C',
+                    name: 'EVREN IŞIK'
+                },
+                {
+                    section: 'D',
+                    name: 'BAHAR SARIKAYA'
+                },
+                {
+                    section: 'E',
+                    name: 'BAHAR SARIKAYA'
+                },
+                {
+                    section: 'F',
+                    name: 'EVREN IŞIK'
+                }
+            ]
+        },
+        {
+            sheet: '5 KASIM',
+            timeSlot: '4.DERS',
+            date: '5 KASIM 2025',
+            day: 'ÇARŞAMBA',
+            exam: '10 KİMYA',
+            grade: '10',
+            subject: 'KİMYA',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'A',
+                    name: 'MERVE OCAKLI'
+                },
+                {
+                    section: 'B',
+                    name: 'HÜLYA BAHTİYAR'
+                },
+                {
+                    section: 'C',
+                    name: 'KENAN ANGÜN'
+                },
+                {
+                    section: 'D',
+                    name: 'BEYHAN GENÇAĞ'
+                },
+                {
+                    section: 'E',
+                    name: 'NURCAN DURMAZ'
+                },
+                {
+                    section: 'F',
+                    name: 'BÜŞRA TARIM'
+                }
+            ]
+        },
+        {
+            sheet: '5 KASIM',
+            timeSlot: '5.DERS',
+            date: '5 KASIM 2025',
+            day: 'ÇARŞAMBA',
+            exam: '9. S.DÜŞÜNME EĞİTİMİ',
+            grade: '9',
+            subject: 'S.DÜŞÜNME EĞİTİMİ',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'A',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'B',
+                    name: 'ŞEVKET BUĞRA CANATA',
+                    location: 'EDEB -2'
+                },
+                {
+                    section: 'C',
+                    name: 'AHMET CARİ'
+                },
+                {
+                    section: 'D',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'E',
+                    name: 'HİLAL ARIKAN'
+                },
+                {
+                    section: 'F',
+                    name: 'HİMMET SEVİNÇ'
+                }
+            ]
+        },
+        {
+            sheet: '5 KASIM',
+            timeSlot: '6.DERS',
+            date: '5 KASIM 2025',
+            day: 'ÇARŞAMBA',
+            exam: '11 EDEBİYAT',
+            grade: '11',
+            subject: 'EDEBİYAT',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'EVREN IŞIK'
+                },
+                {
+                    section: 'A',
+                    name: 'ESRA AKBAŞ GÜLLER'
+                },
+                {
+                    section: 'B',
+                    name: 'HANDAN NİSA ANEMİKAYE'
+                },
+                {
+                    section: 'C',
+                    name: 'ONUR TÜRE',
+                    location: 'Y.DİL -2'
+                },
+                {
+                    section: 'D',
+                    name: 'RECEP SARIKAYA',
+                    location: 'DİKAB -2'
+                },
+                {
+                    section: 'E',
+                    name: 'RECEP SARIKAYA',
+                    location: 'DİKAB -2'
+                },
+                {
+                    section: 'F',
+                    name: 'ONUR TÜRE',
+                    location: 'Y.DİL -2'
+                }
+            ]
+        },
+        {
+            sheet: '5 KASIM',
+            timeSlot: '7.DERS',
+            date: '5 KASIM 2025',
+            day: 'ÇARŞAMBA',
+            exam: '10 TARİH',
+            grade: '10',
+            subject: 'TARİH',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'NAGİHAN KARAKAYA'
+                },
+                {
+                    section: 'A',
+                    name: 'MERVE OCAKLI'
+                },
+                {
+                    section: 'B',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'C',
+                    name: 'KENAN ANGÜN'
+                },
+                {
+                    section: 'D',
+                    name: 'BEYHAN GENÇAĞ'
+                },
+                {
+                    section: 'E',
+                    name: 'NURCAN DURMAZ'
+                },
+                {
+                    section: 'F',
+                    name: 'RECEP SARIKAYA'
+                }
+            ]
+        },
+        {
+            sheet: '5 KASIM',
+            timeSlot: '8.DERS',
+            date: '5 KASIM 2025',
+            day: 'ÇARŞAMBA',
+            exam: '9 BİYOLOJİ',
+            grade: '9',
+            subject: 'BİYOLOJİ',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'MEHMET KAYGISIZ'
+                },
+                {
+                    section: 'A',
+                    name: 'ONUR TÜRE'
+                },
+                {
+                    section: 'B',
+                    name: 'HALİME İNÇAMUR'
+                },
+                {
+                    section: 'C',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'D',
+                    name: 'BAHAR SARIKAYA',
+                    location: 'COĞRAFYA'
+                },
+                {
+                    section: 'E',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'F',
+                    name: 'NUH SATILMIŞ'
+                }
+            ]
+        },
+        {
+            sheet: '6 KASIM',
+            timeSlot: '3.DERS',
+            date: '6 KASIM 2025',
+            day: 'PERŞEMBE',
+            exam: '9 MATEMATİK',
+            grade: '9',
+            subject: 'MATEMATİK',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'EVREN IŞIK'
+                },
+                {
+                    section: 'A',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'B',
+                    name: 'ALİ ÖZKAN ÇELİKLER'
+                },
+                {
+                    section: 'C',
+                    name: 'FATİH AKKOÇ'
+                },
+                {
+                    section: 'D',
+                    name: 'MEHMET AĞCA'
+                },
+                {
+                    section: 'E',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'F',
+                    name: 'NAGİHAN KARAKAYA'
+                }
+            ]
+        },
+        {
+            sheet: '6 KASIM',
+            timeSlot: '4.DERS',
+            date: '6 KASIM 2025',
+            day: 'PERŞEMBE',
+            exam: '10 S. PROJE',
+            grade: '10',
+            subject: 'S. PROJE',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ABDURRAHMAN ÖNER'
+                },
+                {
+                    section: 'A',
+                    name: 'KAĞAN BAHADIR DURGUT'
+                },
+                {
+                    section: 'B',
+                    name: 'RECEP SARIKAYA',
+                    location: 'FELSEFE'
+                },
+                {
+                    section: 'C',
+                    name: 'HALİME İNÇAMUR'
+                },
+                {
+                    section: 'D',
+                    name: 'MERVE OCAKLI'
+                },
+                {
+                    section: 'E',
+                    name: 'MERVE OCAKLI'
+                },
+                {
+                    section: 'F',
+                    name: 'ELİF AZBAY'
+                }
+            ]
+        },
+        {
+            sheet: '6 KASIM',
+            timeSlot: '5.DERS',
+            date: '6 KASIM 2025',
+            day: 'PERŞEMBE',
+            exam: '11 S. MATEMATİK',
+            grade: '11',
+            subject: 'S. MATEMATİK',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'MEHTAP PÜLGİR'
+                },
+                {
+                    section: 'A',
+                    name: 'ONUR KALABAK'
+                },
+                {
+                    section: 'B',
+                    name: 'RAMAZAN GENÇDAL'
+                },
+                {
+                    section: 'C',
+                    name: 'BESTAMİ KILINÇ'
+                },
+                {
+                    section: 'D',
+                    name: 'TURAN TURNA'
+                },
+                {
+                    section: 'E',
+                    name: 'NURCAN DURMAZ'
+                },
+                {
+                    section: 'F',
+                    name: 'NUH SATILMIŞ'
+                }
+            ]
+        },
+        {
+            sheet: '6 KASIM',
+            timeSlot: '6.DERS',
+            date: '6 KASIM 2025',
+            day: 'PERŞEMBE',
+            exam: '11 FELSEFE',
+            grade: '11',
+            subject: 'FELSEFE',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'RAMAZAN GENÇDAL'
+                },
+                {
+                    section: 'A',
+                    name: 'ONUR KALABAK'
+                },
+                {
+                    section: 'B',
+                    name: 'MERVE OCAKLI'
+                },
+                {
+                    section: 'C',
+                    name: 'MEHMET AĞCA'
+                },
+                {
+                    section: 'D',
+                    name: 'TURAN TURNA'
+                },
+                {
+                    section: 'E',
+                    name: 'NURCAN DURMAZ'
+                },
+                {
+                    section: 'F',
+                    name: 'MEHMET AĞCA'
+                }
+            ]
+        },
+        {
+            sheet: '6 KASIM',
+            timeSlot: '7.DERS',
+            date: '6 KASIM 2025',
+            day: 'PERŞEMBE',
+            exam: '10 S. TÜRK SOS. HAY. AİLE',
+            grade: '10',
+            subject: 'S. TÜRK SOS. HAY. AİLE',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ELİF AZBAY'
+                },
+                {
+                    section: 'A',
+                    name: 'KAĞAN BAHADIR DURGUT'
+                },
+                {
+                    section: 'B',
+                    name: 'ABDURRAHMAN ÖNER'
+                },
+                {
+                    section: 'C',
+                    name: 'MEHMET AĞCA'
+                },
+                {
+                    section: 'D',
+                    name: 'BESTAMİ KILINÇ'
+                },
+                {
+                    section: 'E',
+                    name: 'BESTAMİ KILINÇ'
+                },
+                {
+                    section: 'F',
+                    name: 'NAGİHAN KARAKAYA'
+                }
+            ]
+        },
+        {
+            sheet: '6 KASIM',
+            timeSlot: '8.DERS',
+            date: '6 KASIM 2025',
+            day: 'PERŞEMBE',
+            exam: '10 BİYOLOJİ',
+            grade: '10',
+            subject: 'BİYOLOJİ',
+            administrator: 'ONUR TÜRE',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ELİF AZBAY'
+                },
+                {
+                    section: 'A',
+                    name: 'KAĞAN BAHADIR DURGUT'
+                },
+                {
+                    section: 'B',
+                    name: 'BEKİR BAŞAR'
+                },
+                {
+                    section: 'C',
+                    name: 'HÜLYA BAHTİYAR'
+                },
+                {
+                    section: 'D',
+                    name: 'RECEP SARIKAYA'
+                },
+                {
+                    section: 'E',
+                    name: 'RECEP SARIKAYA'
+                },
+                {
+                    section: 'F',
+                    name: 'NAGİHAN KARAKAYA'
+                }
+            ]
+        },
+        {
+            sheet: '7 KASIM',
+            timeSlot: '3.DERS',
+            date: '7 KASIM 2025',
+            day: 'CUMA',
+            exam: '9 S. PEYG. HAYATI',
+            grade: '9',
+            subject: 'S. PEYG. HAYATI',
+            administrator: 'TALHA GÖNÜL',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'A',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'B',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'C',
+                    name: 'TALHA GÖNÜL'
+                },
+                {
+                    section: 'D',
+                    name: 'HİLAL ARIKAN'
+                },
+                {
+                    section: 'E',
+                    name: 'EVREN IŞIK'
+                },
+                {
+                    section: 'F',
+                    name: 'HALİME İNÇAMUR'
+                }
+            ]
+        },
+        {
+            sheet: '7 KASIM',
+            timeSlot: '4.DERS',
+            date: '7 KASIM 2025',
+            day: 'CUMA',
+            exam: '10 S. TEMEL DİNİ BİLGİ',
+            grade: '10',
+            subject: 'S. TEMEL DİNİ BİLGİ',
+            administrator: 'TALHA GÖNÜL',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'HABİB GÖZLER'
+                },
+                {
+                    section: 'A',
+                    name: 'ABDURRAHMAN GÜNER'
+                },
+                {
+                    section: 'B',
+                    name: 'NAGİHAN KARAKAYA'
+                },
+                {
+                    section: 'C',
+                    name: 'ÖZLEM YETİM'
+                },
+                {
+                    section: 'D',
+                    name: 'ŞEVKET BUĞRA CANATA'
+                },
+                {
+                    section: 'E',
+                    name: 'ŞEVKET BUĞRA CANATA'
+                },
+                {
+                    section: 'F',
+                    name: 'ÖZKAN KAYA'
+                }
+            ]
+        },
+        {
+            sheet: '7 KASIM',
+            timeSlot: '5.DERS',
+            date: '7 KASIM 2025',
+            day: 'CUMA',
+            exam: '9. S.ADABI MUA.',
+            grade: '9',
+            subject: 'S.ADABI MUA.',
+            administrator: 'TALHA GÖNÜL',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'EVREN IŞIK'
+                },
+                {
+                    section: 'A',
+                    name: 'OKTAY APAYDIN'
+                },
+                {
+                    section: 'B',
+                    name: 'ŞEVKET BUĞRA CANATA'
+                },
+                {
+                    section: 'C',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'D',
+                    name: 'HİLAL ARIKAN'
+                },
+                {
+                    section: 'E',
+                    name: 'ELİF AZBAY'
+                },
+                {
+                    section: 'F',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                }
+            ]
+        },
+        {
+            sheet: '7 KASIM',
+            timeSlot: '6.DERS',
+            date: '7 KASIM 2025',
+            day: 'CUMA',
+            exam: '11 S. PEYG. HAYATI',
+            grade: '11',
+            subject: 'S. PEYG. HAYATI',
+            administrator: 'TALHA GÖNÜL',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'HANDAN NİSA ANEMİKAYE'
+                },
+                {
+                    section: 'A',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'B',
+                    name: 'MEHTAP PÜLGİR'
+                },
+                {
+                    section: 'C',
+                    name: 'FATİH AKKOÇ'
+                },
+                {
+                    section: 'D',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'E',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'F',
+                    name: 'HİMMET SEVİNÇ'
+                }
+            ]
+        },
+        {
+            sheet: '7 KASIM',
+            timeSlot: '7.DERS',
+            date: '7 KASIM 2025',
+            day: 'CUMA',
+            exam: '10 YABANCI DİL',
+            grade: '10',
+            subject: 'YABANCI DİL',
+            administrator: 'TALHA GÖNÜL',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'A',
+                    name: 'ÖZKAN KAYA'
+                },
+                {
+                    section: 'B',
+                    name: 'HABİB GÖZLER'
+                },
+                {
+                    section: 'C',
+                    name: 'ŞEVKET BUĞRA CANATA'
+                },
+                {
+                    section: 'D',
+                    name: 'HALİME İNÇAMUR'
+                },
+                {
+                    section: 'E',
+                    name: 'HALİME İNÇAMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'NAGİHAN KARAKAYA'
+                }
+            ]
+        },
+        {
+            sheet: '7 KASIM',
+            timeSlot: '8.DERS',
+            date: '7 KASIM 2025',
+            day: 'CUMA',
+            exam: '9 COĞRAFYA',
+            grade: '9',
+            subject: 'COĞRAFYA',
+            administrator: 'TALHA GÖNÜL',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'NESLİHAN DÜLGER AKKAYA'
+                },
+                {
+                    section: 'A',
+                    name: 'MEHTAP PÜLGİR'
+                },
+                {
+                    section: 'B',
+                    name: 'OKTAY APAYDIN'
+                },
+                {
+                    section: 'C',
+                    name: 'ŞEVKET BUĞRA CANATA'
+                },
+                {
+                    section: 'D',
+                    name: 'ELİF AZBAY'
+                },
+                {
+                    section: 'E',
+                    name: 'ÖZLEM YETİM'
+                },
+                {
+                    section: 'F',
+                    name: 'EVREN IŞIK'
+                }
+            ]
+        },
+        {
+            sheet: '18 KASIM',
+            timeSlot: '2.DERS',
+            date: '18 KASIM 2025',
+            day: 'SALI',
+            exam: '9 EDEBİYAT',
+            grade: '9',
+            subject: 'EDEBİYAT',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ALİ ÖZKAN ÇELİKLER'
+                },
+                {
+                    section: 'A',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'B',
+                    name: 'MERVE OCAKLI'
+                },
+                {
+                    section: 'C',
+                    name: 'BAHAR SARIKAYA',
+                    location: 'BİYOLOJİ LAB'
+                },
+                {
+                    section: 'D',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'E',
+                    name: 'HİLAL ARIKAN'
+                },
+                {
+                    section: 'F',
+                    name: 'ESRA AKBAŞ GÜLLER'
+                }
+            ]
+        },
+        {
+            sheet: '18 KASIM',
+            timeSlot: '3.DERS',
+            date: '18 KASIM 2025',
+            day: 'SALI',
+            exam: '10 DİN KÜLTÜRÜ',
+            grade: '10',
+            subject: 'DİN KÜLTÜRÜ',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'GÜLBEN KARABULUT'
+                },
+                {
+                    section: 'A',
+                    name: 'RECEP SARIKAYA',
+                    location: 'EDEB -2'
+                },
+                {
+                    section: 'B',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'C',
+                    name: 'SÜLEYMAN ÜNAL'
+                },
+                {
+                    section: 'D',
+                    name: 'TURAN TURNA',
+                    location: 'MAT - 2'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'BEYHAN GENÇAĞ'
+                }
+            ]
+        },
+        {
+            sheet: '18 KASIM',
+            timeSlot: '4.DERS',
+            date: '18 KASIM 2025',
+            day: 'SALI',
+            exam: '10 FELSEFE',
+            grade: '10',
+            subject: 'FELSEFE',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'GÜLBEN KARABULUT'
+                },
+                {
+                    section: 'A',
+                    name: 'RECEP SARIKAYA',
+                    location: 'EDEB -3'
+                },
+                {
+                    section: 'B',
+                    name: 'BÜŞRA TARIM'
+                },
+                {
+                    section: 'C',
+                    name: 'SÜLEYMAN ÜNAL'
+                },
+                {
+                    section: 'D',
+                    name: 'TURAN TURNA'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'BEYHAN GENÇAĞ'
+                }
+            ]
+        },
+        {
+            sheet: '18 KASIM',
+            timeSlot: '5.DERS',
+            date: '18 KASIM 2025',
+            day: 'SALI',
+            exam: '9. TARİH',
+            grade: '9',
+            subject: 'TARİH',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'ALİ ÖZKAN ÇELİKLER'
+                },
+                {
+                    section: 'A',
+                    name: 'BEKİR BAŞAR'
+                },
+                {
+                    section: 'B',
+                    name: 'KENAN ANGÜN'
+                },
+                {
+                    section: 'C',
+                    name: 'ELİF AKKURT'
+                },
+                {
+                    section: 'D',
+                    name: 'NURAY MERAL'
+                },
+                {
+                    section: 'E',
+                    name: 'HALİME İNÇAMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'MERVE OCAKLI'
+                }
+            ]
+        },
+        {
+            sheet: '18 KASIM',
+            timeSlot: '7.DERS',
+            date: '18 KASIM 2025',
+            day: 'SALI',
+            exam: '11 SAĞLIK BİLGİSİ',
+            grade: '11',
+            subject: 'SAĞLIK BİLGİSİ',
+            administrator: 'MEHMET KAYGISIZ',
+            proctors: [
+                {
+                    section: 'AV',
+                    name: 'HABİB GÖZLER'
+                },
+                {
+                    section: 'A',
+                    name: 'KAĞAN BAHADIR DURGUT'
+                },
+                {
+                    section: 'B',
+                    name: 'ONUR KALABAK'
+                },
+                {
+                    section: 'C',
+                    name: 'MEHTAP PÜLGİR'
+                },
+                {
+                    section: 'D',
+                    name: 'RECEP GÜDÜCÜ',
+                    location: 'DİKAB -1'
+                },
+                {
+                    section: 'E',
+                    name: 'CANAN TUGAYTİMUR'
+                },
+                {
+                    section: 'F',
+                    name: 'MEHTAP PÜLGİR'
+                }
+            ]
+        }
     ];
 
     filteredExams = [...allExams];
@@ -176,10 +1639,10 @@ function getExamStatus(exam) {
 function parseExamDate(dateStr) {
     // Parse Turkish date format "DD MONTH YYYY"
     const months = {
-        'EKİM': '09', 'KASIM': '10', 'ARALIK': '11',
-        'OCAK': '00', 'ŞUBAT': '01', 'MART': '02',
-        'NİSAN': '03', 'MAYIS': '04', 'HAZİRAN': '05',
-        'TEMMUZ': '06', 'AĞUSTOS': '07', 'EYLÜL': '08'
+        'EKİM': '10', 'KASIM': '11', 'ARALIK': '12',
+        'OCAK': '01', 'ŞUBAT': '02', 'MART': '03',
+        'NİSAN': '04', 'MAYIS': '05', 'HAZİRAN': '06',
+        'TEMMUZ': '07', 'AĞUSTOS': '08', 'EYLÜL': '09'
     };
 
     const parts = dateStr.split(' ');
@@ -198,92 +1661,31 @@ function getNextExam() {
         return status === 'upcoming' || status === 'in_progress';
     });
 
+    if (upcomingExams.length === 0) return null;
+
     // Sort by date and time
     upcomingExams.sort((a, b) => {
         const dateA = parseExamDate(a.date);
         const dateB = parseExamDate(b.date);
-        if (dateA !== dateB) return dateA - dateB;
-        return timeSlotMapping[a.timeSlot].start.localeCompare(timeSlotMapping[b.timeSlot].start);
+        if (dateA.getTime() !== dateB.getTime()) {
+            return dateA - dateB;
+        }
+        return a.timeSlot.localeCompare(b.timeSlot);
     });
 
-    return upcomingExams[0] || null;
+    return upcomingExams[0];
 }
 
-// Get current exam
-function getCurrentExam() {
-    return filteredExams.find(exam => getExamStatus(exam) === 'in_progress') || null;
-}
-
-// Update current time indicators in views
+// Update current time indicators
 function updateCurrentTimeIndicators() {
-    const currentExam = getCurrentExam();
-    const nextExam = getNextExam();
-
-    // Update countdown
-    updateCountdown(nextExam);
-
-    // Highlight current exam in schedule view
-    highlightCurrentExam(currentExam);
+    // This can be expanded to show visual indicators in the schedule
 }
 
-// Update countdown for next exam
-function updateCountdown(nextExam) {
-    const countdownElement = document.getElementById('nextExamCountdown');
-    if (!countdownElement) return;
-
-    if (!nextExam) {
-        countdownElement.innerHTML = '<span class="countdown-empty">Bugün sınav yok</span>';
-        return;
+// Request notification permission
+function requestNotificationPermission() {
+    if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
     }
-
-    const now = new Date();
-    const examDate = parseExamDate(nextExam.date);
-    const timeSlot = timeSlotMapping[nextExam.timeSlot];
-
-    const examStart = new Date(examDate);
-    const [startHour, startMin] = timeSlot.start.split(':');
-    examStart.setHours(parseInt(startHour), parseInt(startMin), 0);
-
-    const diff = examStart - now;
-
-    if (diff <= 0) {
-        countdownElement.innerHTML = `<span class="countdown-now">ŞİMDİ: ${nextExam.exam}</span>`;
-    } else {
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        let timeString = '';
-        if (hours > 0) timeString += `${hours}s `;
-        timeString += `${minutes}d ${seconds}s`;
-
-        countdownElement.innerHTML = `
-            <div class="countdown-content">
-                <span class="countdown-time">${timeString}</span>
-                <span class="countdown-exam">${nextExam.exam} (${nextExam.timeSlot})</span>
-            </div>
-        `;
-    }
-}
-
-// Highlight current exam in schedule view
-function highlightCurrentExam(currentExam) {
-    // Remove all current highlights
-    document.querySelectorAll('.current-exam, .upcoming-exam, .completed-exam').forEach(el => {
-        el.classList.remove('current-exam', 'upcoming-exam', 'completed-exam');
-    });
-
-    // Add status indicators to exam cells
-    filteredExams.forEach(exam => {
-        const status = getExamStatus(exam);
-        const examCells = document.querySelectorAll('.exam-cell');
-
-        examCells.forEach(cell => {
-            if (cell.textContent.includes(exam.exam)) {
-                cell.classList.add(`exam-${status}`);
-            }
-        });
-    });
 }
 
 // Check for notifications
@@ -291,62 +1693,22 @@ function checkForNotifications() {
     const nextExam = getNextExam();
     if (!nextExam) return;
 
-    const now = new Date();
     const examDate = parseExamDate(nextExam.date);
     const timeSlot = timeSlotMapping[nextExam.timeSlot];
+    const [hour, min] = timeSlot.start.split(':');
+    examDate.setHours(parseInt(hour), parseInt(min), 0);
 
-    const examStart = new Date(examDate);
-    const [startHour, startMin] = timeSlot.start.split(':');
-    examStart.setHours(parseInt(startHour), parseInt(startMin), 0);
+    const now = new Date();
+    const timeUntilExam = examDate - now;
 
-    const diff = examStart - now;
-
-    // Show notification 30 minutes before exam
-    if (diff > 0 && diff <= 30 * 60 * 1000) {
-        showNotification('Sınav Yaklaşıyor!', `${nextExam.exam} sınavı 30 dakika içinde başlayacak!`, 'warning');
-    }
-
-    // Show notification when exam starts
-    if (diff >= -60 * 1000 && diff <= 0) {
-        showNotification('Sınav Başladı!', `${nextExam.exam} sınavı şimdi başladı!`, 'info');
-    }
-}
-
-// Show notification
-function showNotification(title, message, type = 'info') {
-    // Check if browser supports notifications
-    if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification(title, {
-            body: message,
-            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
-        });
-    }
-
-    // Show in-app notification
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <strong>${title}</strong>
-            <p>${message}</p>
-        </div>
-        <button class="notification-close" onclick="this.parentElement.remove()">×</button>
-    `;
-
-    document.body.appendChild(notification);
-
-    // Auto-remove after 5 seconds
-    setTimeout(() => {
-        if (notification.parentElement) {
-            notification.remove();
+    // Notify 1 hour before exam
+    if (timeUntilExam > 0 && timeUntilExam < 3600000) {
+        if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification('Sınav Yaklaşıyor!', {
+                body: `${nextExam.exam} sınavınız ${Math.floor(timeUntilExam / 60000)} dakika sonra başlayacak.`,
+                icon: '/favicon.ico'
+            });
         }
-    }, 5000);
-}
-
-// Request notification permission
-function requestNotificationPermission() {
-    if ('Notification' in window && Notification.permission === 'default') {
-        Notification.requestPermission();
     }
 }
 
@@ -508,10 +1870,23 @@ function renderScheduleView() {
 
     // Get active week
     const activeTab = document.querySelector('.tab-btn.active');
-    const activeWeek = activeTab ? activeTab.dataset.week : '27-31 EKİM';
+    const activeWeek = activeTab ? activeTab.dataset.week : '3-7 KASIM';
 
     // Filter exams for active week
-    const weekExams = filteredExams.filter(exam => exam.sheet === activeWeek);
+    // Handle both week ranges and individual days
+    let weekExams;
+    if (activeWeek === '3-7 KASIM') {
+        // Show exams from 3, 4, 5, 6, 7 KASIM
+        weekExams = filteredExams.filter(exam =>
+            ['3 KASIM', '4 KASIM', '5 KASIM', '6 KASIM', '7 KASIM'].includes(exam.sheet)
+        );
+    } else if (activeWeek === '18 KASIM') {
+        // Show exams from 18 KASIM
+        weekExams = filteredExams.filter(exam => exam.sheet === '18 KASIM');
+    } else {
+        // Fallback to exact match
+        weekExams = filteredExams.filter(exam => exam.sheet === activeWeek);
+    }
 
     // Create schedule grid
     const scheduleGridHTML = createScheduleGrid(weekExams);
@@ -714,6 +2089,42 @@ function showExamDetails(exam, date, timeSlot, grade) {
     const status = getExamStatus({ exam, date, timeSlot, grade });
     const examDate = parseExamDate(date);
 
+    // Find the full exam object with proctor information
+    const examObj = allExams.find(e =>
+        e.exam === exam &&
+        e.date === date &&
+        e.timeSlot === timeSlot &&
+        e.grade === grade
+    );
+
+    // Generate proctor list HTML
+    let proctorsHTML = '';
+    if (examObj && examObj.proctors && examObj.proctors.length > 0) {
+        proctorsHTML = `
+            <div style="margin-top: 1.5rem; text-align: left;">
+                <h4 style="color: var(--primary-color); margin-bottom: 0.75rem; text-align: center;">Gözetmen Öğretmenler</h4>
+                <div style="background: rgba(52, 152, 219, 0.05); padding: 1rem; border-radius: 8px;">
+                    ${examObj.proctors.map(proctor => `
+                        <div style="padding: 0.5rem; border-bottom: 1px solid rgba(52, 152, 219, 0.1); display: flex; justify-content: space-between;">
+                            <span><strong>${proctor.section} Şubesi:</strong> ${proctor.name}</span>
+                            ${proctor.location ? `<span style="color: var(--text-secondary); font-size: 0.9rem;">${proctor.location}</span>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    // Generate administrator HTML
+    let administratorHTML = '';
+    if (examObj && examObj.administrator) {
+        administratorHTML = `
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(46, 204, 113, 0.1); border-radius: 8px; text-align: center;">
+                <strong>Müdür Yardımcısı:</strong> ${examObj.administrator}
+            </div>
+        `;
+    }
+
     details.innerHTML = `
         <div style="text-align: center;">
             <h3 style="color: var(--primary-color); margin-bottom: 1rem;">${exam}</h3>
@@ -739,6 +2150,8 @@ function showExamDetails(exam, date, timeSlot, grade) {
                     Süre: ${calculateExamDuration(timeInfo.start, timeInfo.end)} dakika
                 </div>
             </div>
+            ${administratorHTML}
+            ${proctorsHTML}
         </div>
     `;
 
