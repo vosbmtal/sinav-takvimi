@@ -1719,18 +1719,25 @@ function updateCurrentTimeIndicators() {
         const minutesLeft = Math.floor(timeLeft / 60000);
 
         countdownElement.innerHTML = `
-            <div class="next-exam-info" style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107;">
-                <div class="exam-status-badge" style="background: #ffc107; color: #000; margin-bottom: 0.5rem;">
+            <div class="next-exam-info" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.05)); border-left: 4px solid #ffc107; padding: 1.5rem; border-radius: 8px;">
+                <div class="exam-status-badge" style="background: #ffc107; color: #000; padding: 0.4rem 1rem; border-radius: 20px; display: inline-block; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 1rem;">
                     ⚡ DEVAM EDEN SINAV
                 </div>
-                <div class="exam-subject" style="font-size: 1.2rem; font-weight: 600; color: var(--primary-color);">
+                <div class="exam-subject" style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem; line-height: 1.3;">
                     ${ongoingExam.exam}
                 </div>
-                <div class="exam-meta" style="margin-top: 0.5rem; color: var(--text-secondary);">
-                    <div><i class="fas fa-calendar"></i> ${ongoingExam.date}</div>
-                    <div><i class="fas fa-clock"></i> ${timeSlot.start} - ${timeSlot.end}</div>
-                    <div style="color: #ffc107; font-weight: 600; margin-top: 0.5rem;">
-                        <i class="fas fa-hourglass-half"></i> Bitiş: ${minutesLeft} dakika
+                <div class="exam-meta" style="display: flex; flex-direction: column; gap: 0.6rem; color: var(--text-secondary); font-size: 0.95rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-calendar" style="width: 20px; color: var(--primary-color);"></i>
+                        <span>${ongoingExam.date}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-clock" style="width: 20px; color: var(--primary-color);"></i>
+                        <span>${timeSlot.start} - ${timeSlot.end}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #ffc107; font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem; padding-top: 0.8rem; border-top: 1px solid rgba(255, 193, 7, 0.2);">
+                        <i class="fas fa-hourglass-half" style="width: 20px;"></i>
+                        <span>Bitiş: ${minutesLeft} dakika</span>
                     </div>
                 </div>
             </div>
@@ -1761,19 +1768,25 @@ function updateCurrentTimeIndicators() {
         }
 
         countdownElement.innerHTML = `
-            <div class="next-exam-info">
-                <div class="exam-subject" style="font-size: 1.2rem; font-weight: 600; color: var(--primary-color);">
+            <div class="next-exam-info" style="padding: 1.5rem;">
+                <div class="exam-subject" style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem; line-height: 1.3;">
                     ${nextExam.exam}
                 </div>
-                <div class="exam-meta" style="margin-top: 0.5rem; color: var(--text-secondary);">
-                    <div><i class="fas fa-calendar"></i> ${nextExam.date}</div>
-                    <div><i class="fas fa-clock"></i> ${timeSlot.start} - ${timeSlot.end}</div>
+                <div class="exam-meta" style="display: flex; flex-direction: column; gap: 0.6rem; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-calendar" style="width: 20px; color: var(--primary-color);"></i>
+                        <span>${nextExam.date}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-clock" style="width: 20px; color: var(--primary-color);"></i>
+                        <span>${timeSlot.start} - ${timeSlot.end}</span>
+                    </div>
                 </div>
-                <div class="countdown-timer" style="margin-top: 1rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 8px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">
+                <div class="countdown-timer" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(52, 152, 219, 0.05)); border-radius: 12px; text-align: center; border: 2px solid rgba(52, 152, 219, 0.2);">
+                    <div style="font-size: 2.2rem; font-weight: 700; color: var(--primary-color); letter-spacing: -0.5px;">
                         ${countdownText}
                     </div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.6rem; font-weight: 500;">
                         sınava kaldı
                     </div>
                 </div>
