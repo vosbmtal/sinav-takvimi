@@ -1678,7 +1678,116 @@ function getNextExam() {
 
 // Update current time indicators
 function updateCurrentTimeIndicators() {
-    // This can be expanded to show visual indicators in the schedule
+    const countdownElement = document.getElementById('nextExamCountdown');
+    const titleElement = document.getElementById('nextExamTitle');
+    if (!countdownElement) return;
+
+    const now = new Date();
+
+    // Find currently ongoing exam
+    const ongoingExam = filteredExams.find(exam => {
+        const status = getExamStatus(exam);
+        return status === 'in_progress';
+    });
+
+    // Find next upcoming exam
+    const upcomingExams = filteredExams.filter(exam => {
+        const status = getExamStatus(exam);
+        return status === 'upcoming';
+    }).sort((a, b) => {
+        const dateA = parseExamDate(a.date);
+        const dateB = parseExamDate(b.date);
+        if (dateA.getTime() !== dateB.getTime()) {
+            return dateA - dateB;
+        }
+        const timeA = timeSlotMapping[a.timeSlot];
+        const timeB = timeSlotMapping[b.timeSlot];
+        return timeA.start.localeCompare(timeB.start);
+    });
+
+    const nextExam = upcomingExams[0];
+
+    // Show ongoing exam if exists
+    if (ongoingExam) {
+        if (titleElement) titleElement.textContent = 'Devam Eden Sınav';
+        const timeSlot = timeSlotMapping[ongoingExam.timeSlot];
+        const examDate = parseExamDate(ongoingExam.date);
+        const endTime = timeSlot.end.split(':');
+        examDate.setHours(parseInt(endTime[0]), parseInt(endTime[1]), 0);
+
+        const timeLeft = examDate - now;
+        const minutesLeft = Math.floor(timeLeft / 60000);
+
+        countdownElement.innerHTML = `
+            <div class="next-exam-info" style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107;">
+                <div class="exam-status-badge" style="background: #ffc107; color: #000; margin-bottom: 0.5rem;">
+                    ⚡ DEVAM EDEN SINAV
+                </div>
+                <div class="exam-subject" style="font-size: 1.2rem; font-weight: 600; color: var(--primary-color);">
+                    ${ongoingExam.exam}
+                </div>
+                <div class="exam-meta" style="margin-top: 0.5rem; color: var(--text-secondary);">
+                    <div><i class="fas fa-calendar"></i> ${ongoingExam.date}</div>
+                    <div><i class="fas fa-clock"></i> ${timeSlot.start} - ${timeSlot.end}</div>
+                    <div style="color: #ffc107; font-weight: 600; margin-top: 0.5rem;">
+                        <i class="fas fa-hourglass-half"></i> Bitiş: ${minutesLeft} dakika
+                    </div>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    // Show next upcoming exam
+    if (nextExam) {
+        if (titleElement) titleElement.textContent = 'Sonraki Sınav';
+        const timeSlot = timeSlotMapping[nextExam.timeSlot];
+        const examDate = parseExamDate(nextExam.date);
+        const startTime = timeSlot.start.split(':');
+        examDate.setHours(parseInt(startTime[0]), parseInt(startTime[1]), 0);
+
+        const timeUntil = examDate - now;
+        const daysLeft = Math.floor(timeUntil / (1000 * 60 * 60 * 24));
+        const hoursLeft = Math.floor((timeUntil % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutesLeft = Math.floor((timeUntil % (1000 * 60 * 60)) / (1000 * 60));
+
+        let countdownText = '';
+        if (daysLeft > 0) {
+            countdownText = `${daysLeft} gün ${hoursLeft} saat`;
+        } else if (hoursLeft > 0) {
+            countdownText = `${hoursLeft} saat ${minutesLeft} dakika`;
+        } else {
+            countdownText = `${minutesLeft} dakika`;
+        }
+
+        countdownElement.innerHTML = `
+            <div class="next-exam-info">
+                <div class="exam-subject" style="font-size: 1.2rem; font-weight: 600; color: var(--primary-color);">
+                    ${nextExam.exam}
+                </div>
+                <div class="exam-meta" style="margin-top: 0.5rem; color: var(--text-secondary);">
+                    <div><i class="fas fa-calendar"></i> ${nextExam.date}</div>
+                    <div><i class="fas fa-clock"></i> ${timeSlot.start} - ${timeSlot.end}</div>
+                </div>
+                <div class="countdown-timer" style="margin-top: 1rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">
+                        ${countdownText}
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                        sınava kaldı
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        // No upcoming exams
+        countdownElement.innerHTML = `
+            <span class="countdown-empty">
+                <i class="fas fa-check-circle" style="color: var(--success-color); margin-right: 0.5rem;"></i>
+                Tüm sınavlar tamamlandı!
+            </span>
+        `;
+    }
 }
 
 // Request notification permission
