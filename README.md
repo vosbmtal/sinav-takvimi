@@ -1,7 +1,7 @@
 # 📅 Sınav Takvimi — Veliköy OSB MTAL
 
 **Veliköy Organize Sanayi Bölgesi Mesleki ve Teknik Anadolu Lisesi**
-1. Dönem Ortak Sınavları için interaktif sınav programı.
+2. Dönem 1. Yazılı Sınavları için interaktif sınav programı.
 
 🔗 **Canlı site:** [sinav.vosb.k12.tr](https://sinav.vosb.k12.tr)
 

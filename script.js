@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateNextExamBanner, 30000);
 });
 
-// Load exam data from Excel file structure (2nd semester exams)
+// Load exam data — 2. Dönem 1. Yazılı Sınavları
 function loadExamData() {
-    // Exam data extracted from 1.Dönem 2.Ortak Sınavlar.xlsx
+    // 2. Dönem 1. Yazılı sınav verileri
     allExams = [
         // Week 1: 30 MART – 3 NİSAN 2026
         {
