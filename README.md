@@ -1,145 +1,113 @@
-# Sınav Takvimi - Interactive Exam Schedule
+# 📅 Sınav Takvimi — Veliköy OSB MTAL
 
-A comprehensive web application for managing and viewing 1st semester common exam schedules with real-time features and proctor management.
+**Veliköy Organize Sanayi Bölgesi Mesleki ve Teknik Anadolu Lisesi**
+1. Dönem Ortak Sınavları için interaktif sınav programı.
 
-## Features
+🔗 **Canlı site:** [sinav.vosb.k12.tr](https://sinav.vosb.k12.tr)
 
-### Core Functionality
-- **Real-time Clock** - Live current time display
-- **Exam Schedule** - Complete schedule for 27-31 Ekim, 3-7 Kasım, and 18 Kasım 2025
-- **Multiple View Modes**:
-  - Schedule Grid View
-  - List View
-  - Timeline View
-- **Advanced Search & Filtering** - By subject, grade, date, or time slot
-- **User Role Support** - Student, Parent, and Administrator interfaces
+---
 
-### Time-Based Features
-- **Live Countdown Timer** - Shows time until next exam
-- **Exam Status Indicators**:
-  - 🟣 Yaklaşak (Upcoming)
-  - 🔴 Devam Ediyor (In Progress)
-  - 🔵 Tamamlandı (Completed)
-- **Smart Notifications** - 30-minute warnings and exam start alerts
-- **Real-time Updates** - Automatic status changes based on current time
+## Özellikler
 
-### Proctor Management (October 30th)
-- **Role-based Access** - Proctor info visible to Parents and Admins only
-- **Complete Assignments** - Main proctor and branch-specific assignments
-- **Location Information** - Exam venues and room details
-- **Toggle Control** - Show/hide proctor information
+- **Takvim Görünümü** — Haftaya göre CSS Grid tabanlı sınav takvimi; zaman dilimi sütunu sabit kalır
+- **Liste Görünümü** — Arama ve filtreye göre sıralanmış tablo görünümü
+- **Anlık Geri Sayım** — Sonraki sınava kalan süreyi gösteren kompakt banner (30 saniyede bir güncellenir)
+- **Sınıf Filtresi** — 9., 10. ve 11. sınıflar için bağımsız filtreleme
+- **Arama** — Ders adı, tarih, gün veya sınıfa göre anlık arama
+- **Karanlık / Aydınlık Tema** — Tercih tarayıcıya kaydedilir
+- **CSV Dışa Aktarma** — Filtrelenmiş sınav listesini indir
+- **Yazdırma Desteği** — Arayüz öğeleri gizlenerek temiz çıktı
+- **Tam Responsive** — Masaüstü, tablet ve mobil uyumlu
 
-### User Interface
-- **Responsive Design** - Works on desktop, tablet, and mobile
-- **Dark/Light Theme** - Toggle with persistence
-- **Turkish Language Support** - Full Turkish interface
-- **Export Functionality** - Download schedules as CSV
-- **Print Support** - Optimized print layouts
+---
 
-## Quick Start
+## Kurulum
 
-### Local Development
-1. Clone or download this repository
-2. Open `index.html` in any modern web browser
-3. No installation required - completely client-side
+Sunucuya gerek yoktur. Dosyaları indirip tarayıcıda açmak yeterlidir:
 
-### Alternative Local Server
 ```bash
-python -m http.server 8000
-```
-Then visit `http://localhost:8000`
-
-## Deployment to Vercel
-
-### Method 1: Vercel CLI (Recommended)
-1. Install Vercel CLI:
-   ```bash
-   npm i -g vercel
-   ```
-
-2. Login to Vercel:
-   ```bash
-   vercel login
-   ```
-
-3. Deploy from project directory:
-   ```bash
-   cd /Users/bugracanata/Developer/sinavprogrami
-   vercel --prod
-   ```
-
-### Method 2: GitHub Integration
-1. Push code to GitHub repository
-2. Connect repository to Vercel
-3. Deploy automatically on push
-
-### Method 3: Drag & Drop
-1. Go to [vercel.com](https://vercel.com)
-2. Click "New Project"
-3. Drag and drop the project folder
-
-## Project Structure
-```
-├── index.html              # Main HTML structure
-├── styles.css              # Complete CSS with responsive design
-├── script.js               # JavaScript application logic
-├── vercel.json            # Vercel deployment configuration
-├── package.json           # Project metadata
-├── README.md              # This file
-├── CLAUDE.md              # Claude Code documentation
-└── 1.Dönem 1.Ortak Sınavlar (2).xlsx  # Excel data source
+git clone https://github.com/vosbmtal/sinav-takvimi.git
+cd sinav-takvimi
+# index.html dosyasını herhangi bir modern tarayıcıda açın
 ```
 
-## Exam Schedule Data
+Veya doğrudan canlı siteyi ziyaret edin: **[sinav.vosb.k12.tr](https://sinav.vosb.k12.tr)**
 
-### Time Slots
-- 1.DERS: 09:00-09:40
-- 2.DERS: 09:50-10:30
-- 3.DERS: 10:40-11:20
-- 4.DERS: 11:30-12:10
-- 5.DERS: 12:20-13:00
-- **Lunch Break: 13:00-13:30**
-- 6.DERS: 13:30-14:10
-- 7.DERS: 14:20-15:00
-- 8.DERS: 15:10-15:50
-- 9.DERS: 16:00-16:40
-- 10.DERS: 16:45-17:25
+---
 
-### October 30th Proctor Assignments
-**Sorumlu Gözetmen (Responsible Proctor): ÖZGE AYDIN**
+## Teknolojiler
 
-## Technologies Used
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **Icons**: Font Awesome 6.0
-- **Deployment**: Vercel Static Hosting
-- **Data**: Embedded JSON structure from Excel file
+| Teknoloji | Kullanım Amacı |
+|---|---|
+| HTML5 | Semantik sayfa yapısı |
+| CSS3 (Grid & Custom Properties) | Takvim düzeni, tasarım sistemi, karanlık mod |
+| Vanilla JavaScript (ES6+) | Veri yönetimi, filtreleme, render |
+| [Inter](https://rsms.me/inter/) | Arayüz fontu |
+| [IBM Plex Mono](https://www.ibm.com/plex/) | Saat ve tarih etiketleri |
+| [Font Awesome 6](https://fontawesome.com/) | İkonlar |
 
-## Browser Compatibility
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
+---
 
-## Features by User Role
+## Proje Yapısı
 
-### Students
-- View exam schedules
-- Search and filter exams
-- Receive notifications
-- Export personal schedules
+```
+sinav-takvimi/
+├── index.html        # Ana HTML yapısı
+├── styles.css        # Tasarım sistemi ve bileşen stilleri (~680 satır)
+├── script.js         # Uygulama mantığı ve sınav verisi
+└── logo.svg          # Okul logosu
+```
 
-### Parents
-- All student features
-- View proctor assignments
-- Complete exam details
+---
 
-### Administrators
-- All parent features
-- Full proctor management access
-- Complete system access
+## Sınav Verisi
 
-## License
-MIT License - feel free to use for educational purposes.
+Sınav verileri `script.js` içindeki `allExams` dizisine gömülüdür. Her sınav şu alanlara sahiptir:
 
-## Support
-For questions or issues, please check the CLAUDE.md file for development guidance.
+```js
+{
+    sheet:    '30 MART-3 NİSAN',   // Hafta anahtarı
+    timeSlot: '3.DERS',            // Ders saati
+    date:     '30 MART 2026',      // Türkçe tarih formatı
+    day:      'PAZARTESİ',         // Gün adı (Türkçe)
+    exam:     '11 ORT. TÜRK TAR.', // Tam sınav adı
+    grade:    '11',                // Sınıf seviyesi: '9', '10' veya '11'
+    subject:  'ORT. TÜRK TAR.'    // Ders adı
+}
+```
+
+### Ders Saatleri
+
+| Saat | Başlangıç | Bitiş |
+|------|-----------|-------|
+| 1.DERS | 09:00 | 09:40 |
+| 2.DERS | 09:50 | 10:30 |
+| 3.DERS | 10:40 | 11:20 |
+| 4.DERS | 11:30 | 12:10 |
+| 5.DERS | 12:20 | 13:00 |
+| 6.DERS | 13:30 | 14:10 |
+| 7.DERS | 14:20 | 15:00 |
+| 8.DERS | 15:10 | 15:50 |
+| 9.DERS | 16:00 | 16:40 |
+| 10.DERS | 16:45 | 17:25 |
+
+---
+
+## Tarayıcı Desteği
+
+Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+
+---
+
+## Katkıda Bulunanlar
+
+| Kişi | Rol |
+|---|---|
+| [Buğra CANATA](https://github.com/bcanata) | Geliştirici |
+
+---
+
+## Lisans
+
+Bu proje **MIT Lisansı** ile lisanslanmıştır.  
+© 2026 Veliköy OSB MTAL — [vosb.k12.tr](https://vosb.k12.tr)
