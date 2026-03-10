@@ -3,219 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sınav Takvimi - 1. Dönem 1. Ortak Sınavlar</title>
+    <title>Veliköy OSB MTAL Sınav Takvimi</title>
+    <meta name="description" content="Veliköy OSB MTAL için resmi sınav takvimi: güncel sınav tarihleri, saatleri ve görünüm seçenekleriyle hızlı erişim.">
+    <meta name="author" content="Buğra CANATA">
+    <meta name="theme-color" content="#f59e0b">
+    <link rel="canonical" href="https://sinav.vosb.k12.tr/">
+
+    <meta property="og:title" content="Veliköy OSB MTAL Sınav Takvimi">
+    <meta property="og:description" content="Güncel sınav takvimi, tarih ve saat bilgileriyle Veliköy OSB MTAL öğrencileri için hızlı erişim.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sinav.vosb.k12.tr/">
+    <meta property="og:site_name" content="Veliköy OSB MTAL Sınav Takvimi">
+    <meta property="og:image" content="https://sinav.vosb.k12.tr/logo.svg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Veliköy OSB MTAL Sınav Takvimi">
+    <meta name="twitter:description" content="Veliköy OSB MTAL sınav tarihleri ve saatleri için güncel takvim.">
+    <meta name="twitter:image" content="https://sinav.vosb.k12.tr/logo.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Veliköy OSB MTAL",
+        "url": "https://sinav.vosb.k12.tr/",
+        "logo": "https://sinav.vosb.k12.tr/logo.svg"
+    }
+    </script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-main">
-                <h1><i class="fas fa-calendar-alt"></i> Sınav Takvimi</h1>
-                <div class="header-info">
-                    <div class="current-time">
-                        <i class="fas fa-clock"></i>
-                        <span id="currentTime">00:00:00</span>
-                    </div>
-                    <div class="today-date" id="todayDate">
-                        <!-- Will be populated with current date -->
-                    </div>
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="header-brand">
+                <img src="logo.svg" alt="Veliköy OSB MTAL" class="brand-logo">
+                <div class="brand-text">
+                    <span class="brand-name">Veliköy OSB MTAL</span>
+                    <span class="brand-sub">Sınav Takvimi</span>
                 </div>
             </div>
-            <div class="header-controls">
-                <div class="user-role-selector">
-                    <label for="userRole">Kullanıcı Türü:</label>
-                    <select id="userRole">
-                        <option value="student">Öğrenci</option>
-                        <option value="parent">Veli</option>
-                        <option value="admin">Yönetici</option>
-                    </select>
-                </div>
-                <button id="themeToggle" class="theme-toggle">
+            <div class="header-end">
+                <span class="header-date" id="headerDate"></span>
+                <button id="themeToggle" class="theme-btn" aria-label="Tema değiştir">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        <!-- Controls Section -->
-        <section class="controls">
-            <div class="control-group">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Ders, gün veya tarih arayın...">
+    <main class="app-main">
+        <div class="content-area">
+
+            <!-- Next Exam Banner -->
+            <div class="next-exam-banner" id="nextExamBanner">
+                <div class="banner-inner">
+                    <span class="banner-loading">Yükleniyor...</span>
                 </div>
             </div>
 
-            <div class="control-group">
-                <div class="filters">
-                    <div class="filter-item">
-                        <label for="gradeFilter">Sınıf:</label>
-                        <select id="gradeFilter" multiple>
-                            <option value="9">9. Sınıf</option>
-                            <option value="10">10. Sınıf</option>
-                            <option value="11">11. Sınıf</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-item">
-                        <label for="weekFilter">Hafta:</label>
-                        <select id="weekFilter">
-                            <option value="all">Tümü</option>
-                            <option value="27-31 EKİM">27-31 Ekim</option>
-                            <option value="3-7 KASIM">3-7 Kasım</option>
-                            <option value="18 KASIM">18 Kasım</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-item">
-                        <label for="viewMode">Görünüm:</label>
-                        <select id="viewMode">
-                            <option value="schedule">Takvim</option>
-                            <option value="list">Liste</option>
-                            <option value="timeline">Zaman Çizelgesi</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-  
-            <div class="control-group">
-                <div class="actions">
-                    <button id="refreshBtn" class="btn btn-secondary">
-                        <i class="fas fa-sync-alt"></i> Yenile
-                    </button>
-                    <button id="exportBtn" class="btn btn-primary">
-                        <i class="fas fa-download"></i> Dışa Aktar
-                    </button>
-                    <button id="printBtn" class="btn btn-secondary">
-                        <i class="fas fa-print"></i> Yazdır
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="search-wrap">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Ders, tarih veya sınıf...">
+                    <button class="search-clear hidden" id="searchClear" aria-label="Temizle">
+                        <i class="fas fa-times"></i>
                     </button>
                 </div>
-            </div>
-        </section>
-
-        <!-- Statistics Section -->
-        <section class="statistics" id="statistics">
-            <div class="stat-card">
-                <i class="fas fa-calendar-check"></i>
-                <div class="stat-info">
-                    <h3 id="totalExams">0</h3>
-                    <p>Toplam Sınav</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-users"></i>
-                <div class="stat-info">
-                    <h3 id="totalStudents">0</h3>
-                    <p>Sınav Sayısı</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-clock"></i>
-                <div class="stat-info">
-                    <h3 id="upcomingExams">0</h3>
-                    <p>Yaklaşan Sınav</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-exclamation-triangle"></i>
-                <div class="stat-info">
-                    <h3 id="todayExams">0</h3>
-                    <p>Bugünkü Sınav</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Countdown Section -->
-        <section class="countdown-section">
-            <div class="countdown-card">
-                <div class="countdown-header">
-                    <i class="fas fa-hourglass-half"></i>
-                    <h3 id="nextExamTitle">Sonraki Sınav</h3>
-                </div>
-                <div id="nextExamCountdown" class="countdown-display">
-                    <span class="countdown-empty">Yükleniyor...</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Main Content -->
-        <section class="content">
-            <!-- Schedule View -->
-            <div id="scheduleView" class="view-container">
-                <div class="schedule-tabs">
-                    <button class="tab-btn active" data-week="3-7 KASIM">3-7 Kasım 2025</button>
-                    <button class="tab-btn" data-week="18 KASIM">18 Kasım 2025</button>
-                </div>
-                <div id="scheduleContent" class="schedule-content">
-                    <div class="schedule-legend">
-                        <div class="legend-item">
-                            <span class="legend-color exam-upcoming"></span>
-                            <span>Yaklaşan</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color exam-in_progress"></span>
-                            <span>Devam Eden</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color exam-completed"></span>
-                            <span>Biten</span>
-                        </div>
+                <div class="toolbar-right">
+                    <div class="grade-chips" role="group" aria-label="Sınıf filtresi">
+                        <button class="grade-chip active" data-grade="all">Tümü</button>
+                        <button class="grade-chip" data-grade="9"><span class="chip-dot dot-9"></span>9</button>
+                        <button class="grade-chip" data-grade="10"><span class="chip-dot dot-10"></span>10</button>
+                        <button class="grade-chip" data-grade="11"><span class="chip-dot dot-11"></span>11</button>
                     </div>
-                    <div id="scheduleGrid">
-                        <!-- Schedule grid will be generated here -->
+                    <div class="view-pills" role="tablist">
+                        <button class="view-pill active" data-view="calendar" aria-label="Takvim görünümü" title="Takvim">
+                            <i class="fas fa-table"></i>
+                        </button>
+                        <button class="view-pill" data-view="list" aria-label="Liste görünümü" title="Liste">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                    <div class="action-btns">
+                        <button class="action-btn" id="exportBtn" aria-label="Dışa aktar" title="CSV İndir">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="action-btn" id="printBtn" aria-label="Yazdır" title="Yazdır">
+                            <i class="fas fa-print"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- List View -->
-            <div id="listView" class="view-container hidden">
-                <div class="list-content">
-                    <table id="examTable" class="exam-table">
-                        <thead>
-                            <tr>
-                                <th>Tarih</th>
-                                <th>Gün</th>
-                                <th>Saat</th>
-                                <th>Sınıf</th>
-                                <th>Ders</th>
-                                <th>İşlemler</th>
-                            </tr>
-                        </thead>
-                        <tbody id="examTableBody">
-                            <!-- Table rows will be generated here -->
-                        </tbody>
-                    </table>
+            <!-- Week Navigation -->
+            <div class="week-nav" id="weekNav">
+                <div class="week-tabs">
+                    <button class="week-tab active" data-week="30 MART-3 NİSAN">30 Mart – 3 Nisan 2026</button>
+                    <button class="week-tab" data-week="6-10 NİSAN">6 – 10 Nisan 2026</button>
+                </div>
+                <div class="grade-legend">
+                    <span class="legend-dot dot-9"></span><span class="legend-label">9. Sınıf</span>
+                    <span class="legend-dot dot-10"></span><span class="legend-label">10. Sınıf</span>
+                    <span class="legend-dot dot-11"></span><span class="legend-label">11. Sınıf</span>
                 </div>
             </div>
 
-            <!-- Timeline View -->
-            <div id="timelineView" class="view-container hidden">
-                <div class="timeline-content">
-                    <div id="timelineContainer" class="timeline">
-                        <!-- Timeline items will be generated here -->
+            <!-- Calendar View (Primary) -->
+            <section class="calendar-view" id="calendarView">
+                <div class="calendar-scroll">
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Generated by JS -->
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Exam Details Modal -->
-        <div id="examModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Sınav Detayları</h2>
-                <div id="examDetails">
-                    <!-- Exam details will be shown here -->
-                </div>
-            </div>
+            <!-- List View (Secondary) -->
+            <section class="list-view hidden" id="listView">
+                <table class="list-table" id="examTable">
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Gün</th>
+                            <th>Saat</th>
+                            <th>Sınıf</th>
+                            <th>Ders</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="examTableBody"></tbody>
+                </table>
+            </section>
+
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Sınav Takvimi Sistemi. Tüm hakları saklıdır.</p>
+    <!-- Exam Modal -->
+    <div id="examModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Kapat">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="modal-title">Sınav Detayları</h2>
+            <div id="examDetails"></div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <span>&copy; 2026 Veliköy OSB MTAL Sınav Takvimi</span>
+            <span>Hazırlayan: Buğra CANATA</span>
         </div>
     </footer>
 
