@@ -1,0 +1,28 @@
+name: 📅 Sınav Verisi Güncellemesi
+description: Hatalı veya eksik sınav bilgisi bildirin
+labels: ["data"]
+body:
+  - type: markdown
+    attributes:
+      value: Sınav programında hata mı gördünüz? Aşağıdaki bilgileri doldurun.
+  - type: input
+    id: exam
+    attributes:
+      label: Sınav Adı
+      placeholder: "Örn: 10 KİMYA"
+    validations:
+      required: true
+  - type: input
+    id: current
+    attributes:
+      label: Mevcut Bilgi
+      placeholder: "Örn: 30 Mart, 3.DERS"
+    validations:
+      required: true
+  - type: input
+    id: correct
+    attributes:
+      label: Doğru Bilgi
+      placeholder: "Örn: 31 Mart, 4.DERS"
+    validations:
+      required: true

@@ -1,0 +1,36 @@
+name: 🐛 Hata Bildirimi
+description: Uygulamada karşılaştığınız bir hata bildirin
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Hata bildirdiğiniz için teşekkürler. Lütfen aşağıdaki alanları doldurun.
+  - type: textarea
+    id: description
+    attributes:
+      label: Hatanın Açıklaması
+      description: Ne oldu? Ne olmasını bekliyordunuz?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Yeniden Oluşturma Adımları
+      placeholder: |
+        1. '...' sayfasına git
+        2. '...' butonuna tıkla
+        3. Hatayı gör
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Tarayıcı
+      options: [Chrome, Firefox, Safari, Edge, Diğer]
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Cihaz / Ekran Genişliği
+      placeholder: "Örn: iPhone 14, 390px"
